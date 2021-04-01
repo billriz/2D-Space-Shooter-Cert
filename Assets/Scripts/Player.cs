@@ -7,6 +7,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speed = 3.5f;
 
+    private float _fireRate = .15f;
+
+    private bool _canFire = true;
+
+    [SerializeField]
+    private GameObject _laserPrefab;
     
     // Start is called before the first frame update
     void Start()
@@ -21,11 +27,22 @@ public class Player : MonoBehaviour
     {
 
         CalculateMovement();
-        
 
+        // when space key is press
+        if (Input.GetKeyDown(KeyCode.Space) && _canFire)
+        {
+
+            // fire laser at the position of the player
+            Instantiate(_laserPrefab, transform.position + new Vector3(0, +.85f, 0), Quaternion.identity);
+            _canFire = false;
+            StartCoroutine(FireControlTimer());
+
+
+
+        }
     }
-       
-    void CalculateMovement()
+
+        void CalculateMovement()
     {
      
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -53,10 +70,17 @@ public class Player : MonoBehaviour
         }
            
 
+    } 
+
+
+    IEnumerator FireControlTimer()
+    {
+
+        yield return new WaitForSeconds(_fireRate);
+        _canFire = true;
+
+
     }
-        
 
 
-    
-    
 }
