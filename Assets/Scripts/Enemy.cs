@@ -7,11 +7,20 @@ public class Enemy : MonoBehaviour
 
     private float _speed = 4.0f;
 
+    private Player _player;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        _player = GameObject.FindWithTag("Player").GetComponent<Player>();
+
+        if (_player == null)
+        {
+
+            Debug.LogError("player is Null");
+        }
+
     }
 
     // Update is called once per frame
@@ -43,7 +52,7 @@ public class Enemy : MonoBehaviour
 
             Destroy(this.gameObject);
 
-        }
+        } 
         else if (other.tag == "Laser")
         {
             Destroy(other.gameObject);
