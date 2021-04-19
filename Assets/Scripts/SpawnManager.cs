@@ -8,8 +8,12 @@ public class SpawnManager : MonoBehaviour
     
     [SerializeField]
     private GameObject _enemyPrefab;
+
     [SerializeField]
     private GameObject _enemyContainer;
+
+    [SerializeField]
+    private float _enemySpawnRate = 5.0f;
 
     private bool _stopSpawning = false;
     
@@ -34,10 +38,10 @@ public class SpawnManager : MonoBehaviour
         while (_stopSpawning == false)
         {
 
-            Vector3 PosToSpwan = new Vector3(Random.Range(-8.0f, 8.0f), 7, 0);
+            Vector3 PosToSpwan = new Vector3(Random.Range(-11.3f, 11.3f), 7, 0);
             GameObject newEnemy = Instantiate(_enemyPrefab, PosToSpwan, Quaternion.identity);
             newEnemy.transform.parent = _enemyContainer.transform;
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(_enemySpawnRate);
 
         }
 

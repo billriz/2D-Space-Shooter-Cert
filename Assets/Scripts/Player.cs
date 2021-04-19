@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && _canFire)
         {
 
-            Instantiate(_laserPrefab, transform.position + new Vector3(0, +.85f, 0), Quaternion.identity);
+            Instantiate(_laserPrefab, transform.position + new Vector3(0, +.8f, 0), Quaternion.identity);
             _canFire = false;           
             StartCoroutine(FireControlTimer());
 
