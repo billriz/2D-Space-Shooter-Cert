@@ -8,13 +8,17 @@ public class SpawnManager : MonoBehaviour
     
     [SerializeField]
     private GameObject _enemyPrefab;
+    [SerializeField]
+    private GameObject _powerUpPrefab;
 
     [SerializeField]
     private GameObject _enemyContainer;
+    
+
 
     [SerializeField]
     private float _enemySpawnRate = 5.0f;
-
+   
     private bool _stopSpawning = false;
     
     
@@ -22,6 +26,8 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnRoutine());
+
+        StartCoroutine(PowerUpSpawnRoutine());
     }
 
     // Update is called once per frame
@@ -44,6 +50,21 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(_enemySpawnRate);
 
         }
+
+    }
+
+    IEnumerator PowerUpSpawnRoutine()
+    {
+
+        while (_stopSpawning == false)
+        {
+
+            Vector3 PosToSpawn = new Vector3(Random.Range(-11.3f, 11.3f), 7, 0);
+            GameObject newpowerUp = Instantiate(_powerUpPrefab, PosToSpawn, Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(3, 8));
+
+        }
+
 
     }
 

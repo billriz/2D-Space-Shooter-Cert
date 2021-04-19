@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     private float _speed = 3.5f;
     [SerializeField]
     private float _fireRate = .50f;
+    [SerializeField]
+    private float _powerDownTimer = 5.0f;
 
     private bool _canFire = true;
 
@@ -15,9 +17,14 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
+    private GameObject _tripleShotPrefab;
+
+    [SerializeField]
     private int _lives = 3;
 
     private SpawnManager _spawnManager;
+    [SerializeField]
+    private bool _isTripleShotActive;
 
 
     // Start is called before the first frame update
@@ -41,7 +48,12 @@ public class Player : MonoBehaviour
 
         CalculateMovement();
 
-        FireLaser();
+        if (Input.GetKeyDown(KeyCode.Space) && _canFire)
+        {
+
+            FireLaser();
+        }
+            
 
        
     }
@@ -78,15 +90,21 @@ public class Player : MonoBehaviour
 
     void FireLaser()
     {
-       
-        if (Input.GetKeyDown(KeyCode.Space) && _canFire)
+
+        _canFire = false;
+
+        if (_isTripleShotActive)
         {
-
-            Instantiate(_laserPrefab, transform.position + new Vector3(0, +.8f, 0), Quaternion.identity);
-            _canFire = false;           
-            StartCoroutine(FireControlTimer());
-
+           Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+               
         }
+        else
+        {
+          Instantiate(_laserPrefab, transform.position + new Vector3(0, +.8f, 0), Quaternion.identity);
+        }
+
+        StartCoroutine(FireControlTimer());
+
 
     }
 
@@ -109,6 +127,23 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    public void TripleShotActive()
+    {
+
+        _isTripleShotActive = true;
+        StartCoroutine(TripleShotPowerDownRoutine());
+    }
+
+    IEnumerator TripleShotPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(_powerDownTimer);
+        _isTripleShotActive = false;
+
+
+    }
+
+
 
    
 
