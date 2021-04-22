@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speed = 3.5f;
     [SerializeField]
+    private float _speedBoostMultiplier = 2.0f;
+    [SerializeField]
     private float _fireRate = .50f;
     [SerializeField]
     private float _powerDownTimer = 5.0f;
@@ -24,7 +26,8 @@ public class Player : MonoBehaviour
 
     private SpawnManager _spawnManager;
     [SerializeField]
-    private bool _isTripleShotActive;
+    private bool _isTripleShotActive = false;
+    private bool _isSpeedBoostActive = false;
 
 
     // Start is called before the first frame update
@@ -61,29 +64,32 @@ public class Player : MonoBehaviour
     void CalculateMovement()
     {
      
-           float horizontalInput = Input.GetAxis("Horizontal");
-           float verticalInput = Input.GetAxis("Vertical");
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
 
-           Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
-           transform.Translate(direction * _speed * Time.deltaTime);
-
-          if(transform.position.y >= 0)
-          {
+        Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
+                  
+        
+        transform.Translate(direction * _speed * Time.deltaTime);
+       
+       
+        if(transform.position.y >= 0)
+        {
             transform.position = new Vector3(transform.position.x, 0, 0);
-          }
-          else if(transform.position.y <= -5.8f)
-          {
+        }
+        else if(transform.position.y <= -5.8f)
+        {
             transform.position = new Vector3(transform.position.x, -5.8f, 0);           
-          }
+        }
 
-          if (transform.position.x >= 12.9f)
-          {
+        if (transform.position.x >= 12.9f)
+        {
             transform.position = new Vector3(-12.9f, transform.position.y, 0);
-          }
-          else if (transform.position.x <= -12.9f)
-          {
+        }
+        else if (transform.position.x <= -12.9f)
+        {
             transform.position = new Vector3(12.9f, transform.position.y, 0);
-          }
+        }
            
 
     } 
@@ -140,10 +146,24 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(_powerDownTimer);
         _isTripleShotActive = false;
 
+    }
+
+    public void SpeedBoostActive()
+    {
+
+        _isSpeedBoostActive = true;
+        _speed *= _speedBoostMultiplier;
+        StartCoroutine(SpeedBoostPowerDownRoutine());
 
     }
 
+    IEnumerator SpeedBoostPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(_powerDownTimer);
+        _speed /= _speedBoostMultiplier;
+        _isSpeedBoostActive = false;
 
+    }
 
    
 
