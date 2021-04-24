@@ -51,7 +51,7 @@ public class PowerUps : MonoBehaviour
                         player.SpeedBoostActive();
                         break;
                     case 2:
-                        Debug.LogError("Collected Shield Power up");
+                        player.PlayerShieldActive();
                         break;
                     default:
                         Debug.LogError("No Case Found");
