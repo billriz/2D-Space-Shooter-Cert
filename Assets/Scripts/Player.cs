@@ -34,6 +34,8 @@ public class Player : MonoBehaviour
     private bool _isPlayerShieldActive = false;
     [SerializeField]
     private GameObject _PlayerShieldVisualizer;
+    [SerializeField]
+    private GameObject[] _playerDamage;
 
     private UIManager _uIManager;
 
@@ -152,6 +154,12 @@ public class Player : MonoBehaviour
             _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
         }
+        else
+        {
+
+            PlayerDamageVisual();
+
+        }
     }
 
     public void TripleShotActive()
@@ -209,4 +217,33 @@ public class Player : MonoBehaviour
 
     }
     
+    private void PlayerDamageVisual()
+    {
+        switch(_lives)
+        {
+            case 2:
+
+                int randomDamage = Random.Range(0, 2);
+                _playerDamage[randomDamage].SetActive(true);
+                break;
+
+            case 1:
+
+                if(_playerDamage[0].activeSelf)
+                {
+                    _playerDamage[1].SetActive(true);
+                }
+                else
+                {
+                    _playerDamage[0].SetActive(true);
+                }
+                break;
+
+            default:
+                break;
+
+        } 
+        
+
+    }
 }
