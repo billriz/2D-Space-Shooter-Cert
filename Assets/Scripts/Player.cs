@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     private GameObject _laserPrefab;
     [SerializeField]
     private GameObject _tripleShotPrefab;
+    [SerializeField]
+    private AudioClip _fireLaserSound;
 
     [SerializeField]
     private int _lives = 3;
@@ -36,9 +38,12 @@ public class Player : MonoBehaviour
     private GameObject _PlayerShieldVisualizer;
     [SerializeField]
     private GameObject[] _playerDamage;
+    [SerializeField]
+    private AudioClip _expolsionSoundClip;
 
     private UIManager _uIManager;
 
+    private AudioSource _audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -57,6 +62,20 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("UI Manager is Null");
         }
+
+        _audioSource = GetComponent<AudioSource>();
+
+        if (_audioSource == null)
+        {
+            Debug.LogError("Audio Source on the Player is Null");
+
+        }
+        else
+        {
+            _audioSource.clip = _fireLaserSound;
+
+        }
+
     }
 
     // Update is called once per frame
@@ -123,6 +142,8 @@ public class Player : MonoBehaviour
           Instantiate(_laserPrefab, transform.position + new Vector3(0, +.8f, 0), Quaternion.identity);
         }
 
+        _audioSource.Play();
+
         StartCoroutine(FireControlTimer());
 
 
@@ -152,6 +173,8 @@ public class Player : MonoBehaviour
         if (_lives < 1)
         {
             _spawnManager.OnPlayerDeath();
+            _audioSource.clip = _expolsionSoundClip;
+            _audioSource.Play();
             Destroy(this.gameObject);
         }
         else

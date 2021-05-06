@@ -10,7 +10,7 @@ public class Astroid : MonoBehaviour
     private SpawnManager _spawnmanager;
     [SerializeField]
     private GameObject _explosionPreFab;
-
+       
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +21,7 @@ public class Astroid : MonoBehaviour
 
             Debug.LogError("Spawn Manager is Null");
         }
+                
     }
 
     // Update is called once per frame

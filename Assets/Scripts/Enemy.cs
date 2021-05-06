@@ -6,6 +6,11 @@ public class Enemy : MonoBehaviour
 {
 
     private float _speed = 4.0f;
+    [SerializeField]
+    private AudioClip _ExpolsionSoundClip;
+
+    private AudioSource _audioSource;
+
 
     private Player _player;
 
@@ -34,6 +39,13 @@ public class Enemy : MonoBehaviour
         }
 
         _collider2d = GetComponent<Collider2D>();
+
+        _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null)
+        {
+
+            Debug.LogError("Audio Source on the Enemey is Null");
+        }
 
 
     }
@@ -65,10 +77,7 @@ public class Enemy : MonoBehaviour
                 player.Damage();
             }
 
-            EnemyDeath();
-
-            //_animator.SetTrigger("OnEnemyDeath");
-            //Destroy(this.gameObject, 2.3f);
+            EnemyDeath();            
 
         } 
         else if (other.tag == "Laser")
@@ -80,9 +89,7 @@ public class Enemy : MonoBehaviour
                 _player.UpdateScore(10);
             }
 
-            EnemyDeath();
-            //_animator.SetTrigger("OnEnemyDeath");
-            //Destroy(this.gameObject, 2.3f); 
+            EnemyDeath();          
             
         } 
 
@@ -92,6 +99,8 @@ public class Enemy : MonoBehaviour
         _collider2d.enabled = !_animator.enabled;
         _speed = 0.2f;
         _animator.SetTrigger("OnEnemyDeath");
+        _audioSource.clip = _ExpolsionSoundClip;
+        _audioSource.Play();
         Destroy(this.gameObject, 2.2f);
 
     }
