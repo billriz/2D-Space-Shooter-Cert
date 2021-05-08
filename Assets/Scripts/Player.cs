@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _lives = 3;
 
+    public bool _isPlayerDead;
+
     private int _score;
 
     private SpawnManager _spawnManager;
@@ -44,6 +46,8 @@ public class Player : MonoBehaviour
     private UIManager _uIManager;
 
     private AudioSource _audioSource;
+
+    private Animator _animator;
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +80,14 @@ public class Player : MonoBehaviour
 
         }
 
+        _animator = GetComponent<Animator>();
+
+        if (_animator == null)
+        {
+
+            Debug.LogError("Animator on the Player is Null");
+        }
+
     }
 
     // Update is called once per frame
@@ -99,8 +111,30 @@ public class Player : MonoBehaviour
      
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
+        int CheckMovement = Mathf.RoundToInt(horizontalInput);
 
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
+
+        switch (CheckMovement)            
+        {
+
+            case -1:
+                _animator.SetBool("IsTurningRight", false);
+                _animator.SetBool("IsTurningLeft", true);
+                break;
+            case 0:
+                _animator.SetBool("IsTurningRight", false);
+                _animator.SetBool("IsTurningLeft", false);
+                break;
+            case 1:
+                _animator.SetBool("IsTurningLeft", false);
+                _animator.SetBool("IsTurningRight", true);
+                break;
+            default:
+                break;
+                  
+        }
+        
                   
         
         transform.Translate(direction * _speed * Time.deltaTime);
@@ -172,6 +206,7 @@ public class Player : MonoBehaviour
         
         if (_lives < 1)
         {
+            _isPlayerDead = true;
             _spawnManager.OnPlayerDeath();
             _audioSource.clip = _expolsionSoundClip;
             _audioSource.Play();

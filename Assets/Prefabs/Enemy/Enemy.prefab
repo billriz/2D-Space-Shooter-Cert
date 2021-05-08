@@ -147,6 +147,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ExpolsionSoundClip: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
+  _fireRate: 3
+  _laserPrefab: {fileID: 8789916713383404705, guid: 13e31a16fb77e784da82b5c475d3544b, type: 3}
+  _laserSoundClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
 --- !u!95 &5587164245144561967
 Animator:
   serializedVersion: 3
