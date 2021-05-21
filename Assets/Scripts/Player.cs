@@ -26,15 +26,16 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _lives = 3;
 
-    public bool _isPlayerDead;
+    public bool isPlayerDead;
 
     private int _score;
 
     private SpawnManager _spawnManager;
     [SerializeField]
     private bool _isTripleShotActive = false;
-    private bool _isSpeedBoostActive = false;
     [SerializeField]
+
+    private bool _isSpeedBoostActive = false;
     private bool _isPlayerShieldActive = false;
     [SerializeField]
     private GameObject _PlayerShieldVisualizer;
@@ -101,9 +102,7 @@ public class Player : MonoBehaviour
 
             FireLaser();
         }
-            
 
-       
     }
 
     void CalculateMovement()
@@ -111,11 +110,11 @@ public class Player : MonoBehaviour
      
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
-        int CheckMovement = Mathf.RoundToInt(horizontalInput);
+        int checkMovement = Mathf.RoundToInt(horizontalInput);
 
         Vector3 direction = new Vector3(horizontalInput, verticalInput, 0);
 
-        switch (CheckMovement)            
+        switch (checkMovement)            
         {
 
             case -1:
@@ -206,7 +205,7 @@ public class Player : MonoBehaviour
         
         if (_lives < 1)
         {
-            _isPlayerDead = true;
+            isPlayerDead = true;
             _spawnManager.OnPlayerDeath();
             _audioSource.clip = _expolsionSoundClip;
             _audioSource.Play();
@@ -300,8 +299,7 @@ public class Player : MonoBehaviour
             default:
                 break;
 
-        } 
-        
+        }
 
     }
 }

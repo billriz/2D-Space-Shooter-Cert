@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private AudioClip _laserSoundClip;
 
-    private bool _isEnemeyDestroyed;
+    private bool _isEnemyDestroyed;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
         if (_audioSource == null)
         {
 
-            Debug.LogError("Audio Source on the Enemey is Null");
+            Debug.LogError("Audio Source on the Enemy is Null");
         }
                 
 
@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour
 
         CalculateMovement();
         
-        if (_canFire == true && _isEnemeyDestroyed == false)
+        if (_canFire == true && _isEnemyDestroyed == false)
         {
 
             FireLaser();
@@ -90,8 +90,8 @@ public class Enemy : MonoBehaviour
     {
         _canFire = false;
 
-        GameObject EnemyLaser = Instantiate(_laserPrefab, transform.position, Quaternion.identity);
-        Laser[] lasers = EnemyLaser.GetComponentsInChildren<Laser>();
+        GameObject enemyLaser = Instantiate(_laserPrefab, transform.position, Quaternion.identity);
+        Laser[] lasers = enemyLaser.GetComponentsInChildren<Laser>();
 
         for (int i = 0; i < lasers.Length; i++)
         {
@@ -101,11 +101,11 @@ public class Enemy : MonoBehaviour
         }
         _audioSource.clip = _laserSoundClip;
         _audioSource.Play();
-        StartCoroutine(FireControlTimmer());
+        StartCoroutine(FireControlTimer());
 
     }
 
-    IEnumerator FireControlTimmer()
+   private IEnumerator FireControlTimer()
     {
 
         yield return new WaitForSeconds(_fireRate);
@@ -144,7 +144,7 @@ public class Enemy : MonoBehaviour
     }
     private void EnemyDeath()
     {
-        _isEnemeyDestroyed = true;
+        _isEnemyDestroyed = true;
         _collider2d.enabled = !_animator.enabled;
         _speed = 0.2f;
         _animator.SetTrigger("OnEnemyDeath");

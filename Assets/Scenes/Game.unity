@@ -689,7 +689,7 @@ MonoBehaviour:
   _lives: 3
   _isPlayerDead: 0
   _isTripleShotActive: 0
-  _isPlayerShieldActive: 0
+  _isSpeedBoostActive: 0
   _PlayerShieldVisualizer: {fileID: 1825206613}
   _playerDamage:
   - {fileID: 721356082}
@@ -754,7 +754,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 867805752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.97, y: 0, z: 0}
+  m_LocalPosition: {x: -10.44, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 1825206616}
