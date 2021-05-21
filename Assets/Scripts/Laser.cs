@@ -91,7 +91,7 @@ public class Laser : MonoBehaviour
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
-                if (player._isPlayerDead == false)
+                if (player.isPlayerDead == false)
                 {
                     player.Damage();
 
