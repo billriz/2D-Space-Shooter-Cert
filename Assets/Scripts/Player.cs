@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 3.5f;
+
+    private float currentSpeed;
     [SerializeField]
     private float _speedBoostMultiplier = 2.0f;
     [SerializeField]
@@ -133,8 +135,20 @@ public class Player : MonoBehaviour
                 break;
                   
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            float currentSpeed = _speed * 1.5f;
+            _speed = currentSpeed;
+        }
+        else
+        {
+            float currentSpeed = _speed;
+            _speed = currentSpeed;
+            
+        }
+
         
-                  
         
         transform.Translate(direction * _speed * Time.deltaTime);
        
