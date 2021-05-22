@@ -95,6 +95,11 @@ public class Player : MonoBehaviour
     void Update()
     {
 
+       // if (Input.GetKeyDown(KeyCode.LeftShift))
+      //  {
+      //      _speed *= 1.5f;
+      //  }
+        
         CalculateMovement();
 
         if (Input.GetKeyDown(KeyCode.Space) && _canFire)
