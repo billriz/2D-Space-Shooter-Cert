@@ -6,10 +6,12 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 3.5f;
-
-    private float currentSpeed;
+    [SerializeField]
+    private float _currentSpeed;
     [SerializeField]
     private float _speedBoostMultiplier = 2.0f;
+
+    private float _thrustMultiplier = 1.5f;
     [SerializeField]
     private float _fireRate = .50f;
     [SerializeField]
@@ -36,8 +38,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool _isTripleShotActive = false;
     [SerializeField]
-
     private bool _isSpeedBoostActive = false;
+
+    private bool _isThrusterActive = false;
     private bool _isPlayerShieldActive = false;
     [SerializeField]
     private GameObject _PlayerShieldVisualizer;
@@ -96,7 +99,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            _isThrusterActive = true;
+        }
+        else
+        {
+            _isThrusterActive = false;
+        }
+        
+        CalculateSpeed();
+        
         CalculateMovement();
 
         if (Input.GetKeyDown(KeyCode.Space) && _canFire)
@@ -135,22 +148,9 @@ public class Player : MonoBehaviour
                 break;
                   
         }
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            float currentSpeed = _speed * 1.5f;
-            _speed = currentSpeed;
-        }
-        else
-        {
-            float currentSpeed = _speed;
-            _speed = currentSpeed;
-            
-        }
-
         
-        
-        transform.Translate(direction * _speed * Time.deltaTime);
+
+        transform.Translate(direction * _currentSpeed * Time.deltaTime);
        
        
         if(transform.position.y >= 0)
@@ -170,9 +170,25 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3(12.9f, transform.position.y, 0);
         }
-           
 
-    } 
+    }
+
+    private void CalculateSpeed()
+    {
+        _currentSpeed = _speed;
+        
+        if (_isThrusterActive && _isSpeedBoostActive == false)
+        {
+            _currentSpeed = _speed * _thrustMultiplier;
+            
+        }
+        else if (_isSpeedBoostActive)
+        {
+            _currentSpeed = _speed * _speedBoostMultiplier;
+            
+        }
+
+    }
 
     void FireLaser()
     {
@@ -192,7 +208,6 @@ public class Player : MonoBehaviour
         _audioSource.Play();
 
         StartCoroutine(FireControlTimer());
-
 
     }
 
@@ -251,7 +266,7 @@ public class Player : MonoBehaviour
     {
 
         _isSpeedBoostActive = true;
-        _speed *= _speedBoostMultiplier;
+      //  _speed *= _speedBoostMultiplier;
         StartCoroutine(SpeedBoostPowerDownRoutine());
 
     }
@@ -259,10 +274,11 @@ public class Player : MonoBehaviour
     IEnumerator SpeedBoostPowerDownRoutine()
     {
         yield return new WaitForSeconds(_powerDownTimer);
-        _speed /= _speedBoostMultiplier;
+       // _speed /= _speedBoostMultiplier;
         _isSpeedBoostActive = false;
 
     }
+    
 
    public void PlayerShieldActive()
     {
