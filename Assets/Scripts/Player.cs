@@ -99,13 +99,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-<<<<<<< HEAD
-
-       // if (Input.GetKeyDown(KeyCode.LeftShift))
-      //  {
-      //      _speed *= 1.5f;
-      //  }
-=======
         if (Input.GetKey(KeyCode.LeftShift))
         {
             _isThrusterActive = true;
@@ -116,7 +109,7 @@ public class Player : MonoBehaviour
         }
         
         CalculateSpeed();
->>>>>>> thrusters
+
         
         CalculateMovement();
 
