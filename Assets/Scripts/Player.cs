@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private int _lives = 3;
+    [SerializeField]
+    private int _hits;
 
     public bool isPlayerDead;
 
@@ -54,6 +56,8 @@ public class Player : MonoBehaviour
     private AudioSource _audioSource;
 
     private Animator _animator;
+    [SerializeField]
+    private SpriteRenderer _playerShield;
 
     // Start is called before the first frame update
     void Start()
@@ -214,20 +218,19 @@ public class Player : MonoBehaviour
 
     IEnumerator FireControlTimer()
     {
-
-          yield return new WaitForSeconds(_fireRate);
+        yield return new WaitForSeconds(_fireRate);
           _canFire = true;
-
-
     }
 
     public void Damage()
     {
-        if (_isPlayerShieldActive == true)
+        if (_isPlayerShieldActive)
         {
-            _isPlayerShieldActive = false;
-            _PlayerShieldVisualizer.SetActive(false);
-            return;
+            _hits += 1;
+            PlayerShieldStrength(_hits);
+           // _isPlayerShieldActive = false;
+           // _PlayerShieldVisualizer.SetActive(false);
+           return;
         }
 
         _lives--;
@@ -267,7 +270,6 @@ public class Player : MonoBehaviour
     {
 
         _isSpeedBoostActive = true;
-      //  _speed *= _speedBoostMultiplier;
         StartCoroutine(SpeedBoostPowerDownRoutine());
 
     }
@@ -275,8 +277,7 @@ public class Player : MonoBehaviour
     IEnumerator SpeedBoostPowerDownRoutine()
     {
         yield return new WaitForSeconds(_powerDownTimer);
-       // _speed /= _speedBoostMultiplier;
-        _isSpeedBoostActive = false;
+       _isSpeedBoostActive = false;
 
     }
     
@@ -285,20 +286,34 @@ public class Player : MonoBehaviour
     {
         _isPlayerShieldActive = true;
         _PlayerShieldVisualizer.SetActive(true);
-        StartCoroutine(PlayerShieldPowerDownRoutine());
-        
+        _hits = 0;
+        _playerShield.color = new Color(1, 1, 1, 1);
     }
 
-    IEnumerator PlayerShieldPowerDownRoutine()
-    {
+   private void PlayerShieldStrength(int hits)
+   {
+       switch (hits)
+       {
+           case 0:
+              break;
+           case 1:
+               _playerShield.color = new Color(1, 1, 1, .50f);
+               break;
+           case 2:
+               _playerShield.color = new Color(1, 1, 1, .10f);
+               break;
+           case 3:
+               _PlayerShieldVisualizer.SetActive(false);
+               _isPlayerShieldActive = false;
+               _playerShield.color = new Color(1, 1, 1, 1);
+               _hits = 0;
+               break;
+           default:
+               break;
+       }
+   }
 
-        yield return new WaitForSeconds(_powerDownTimer);
-        _PlayerShieldVisualizer.SetActive(false);
-        _isPlayerShieldActive = false;
-
-    }
-
-    public void UpdateScore(int points)
+   public void UpdateScore(int points)
     {
         _score += points;
         _uIManager.UpdateScore(_score);

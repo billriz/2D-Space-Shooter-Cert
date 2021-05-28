@@ -680,6 +680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 3.5
+  _currentSpeed: 0
   _speedBoostMultiplier: 2
   _fireRate: 0.5
   _powerDownTimer: 5
@@ -687,7 +688,8 @@ MonoBehaviour:
   _tripleShotPrefab: {fileID: 1057596532175789182, guid: 3bfae9ddca47a464c8cff4bd4ef0842b, type: 3}
   _fireLaserSound: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
   _lives: 3
-  _isPlayerDead: 0
+  _hits: 0
+  isPlayerDead: 0
   _isTripleShotActive: 0
   _isSpeedBoostActive: 0
   _PlayerShieldVisualizer: {fileID: 1825206613}
@@ -695,6 +697,7 @@ MonoBehaviour:
   - {fileID: 721356082}
   - {fileID: 1905866980}
   _expolsionSoundClip: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
+  _playerShield: {fileID: 1825206615}
 --- !u!212 &867805755
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -754,7 +757,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 867805752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.44, y: 0, z: 0}
+  m_LocalPosition: {x: 3.11, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 1825206616}
