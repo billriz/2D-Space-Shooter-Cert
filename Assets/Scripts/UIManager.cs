@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     private Text _gameOver;
     [SerializeField]
     private Text _RestartLevel;
+    [SerializeField]
+    private Text _ammoCount;
 
     private GameManager _gameManager;
             
@@ -29,6 +31,7 @@ public class UIManager : MonoBehaviour
         _scoreText.text = "Score: " + 0;
         _gameOver.gameObject.SetActive(false);
         _RestartLevel.gameObject.SetActive(false);
+        _ammoCount.text = "Ammo: " + 15;
 
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
         if (_gameManager == null)
@@ -64,6 +67,12 @@ public class UIManager : MonoBehaviour
             GameOverSequence();
 
         }
+    }
+
+    public void UpdateAmmo(int ammoCount)
+    {
+        _ammoCount.text = "Ammo: " + ammoCount;
+
     }
 
     private void GameOverSequence()

@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
 
     private bool _canFire = true;
 
+    private int _ammoCount;
+
     
     [SerializeField]
     private GameObject _laserPrefab;
@@ -64,7 +66,8 @@ public class Player : MonoBehaviour
     {
 
         transform.position = new Vector3(0, 0, 0);
-
+        _ammoCount = 15;
+        
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         if (_spawnManager == null)
         {
@@ -199,6 +202,8 @@ public class Player : MonoBehaviour
     {
 
         _canFire = false;
+        _ammoCount -= 1;
+        _uIManager.UpdateAmmo(_ammoCount);
 
         if (_isTripleShotActive)
         {
@@ -219,7 +224,11 @@ public class Player : MonoBehaviour
     IEnumerator FireControlTimer()
     {
         yield return new WaitForSeconds(_fireRate);
-          _canFire = true;
+        _canFire = true;
+        if (_ammoCount < 1)
+        {
+            _canFire = false;
+        }
     }
 
     public void Damage()
