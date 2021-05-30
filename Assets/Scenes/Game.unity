@@ -923,6 +923,7 @@ MonoBehaviour:
   _livesImg: {fileID: 1714086101}
   _gameOver: {fileID: 1049616946}
   _RestartLevel: {fileID: 9677962}
+  _ammoCount: {fileID: 1077668976}
 --- !u!114 &945945179
 MonoBehaviour:
   m_ObjectHideFlags: 0
