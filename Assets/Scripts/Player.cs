@@ -245,8 +245,6 @@ public class Player : MonoBehaviour
         {
             _hits += 1;
             PlayerShieldStrength(_hits);
-           // _isPlayerShieldActive = false;
-           // _PlayerShieldVisualizer.SetActive(false);
            return;
         }
 
@@ -263,12 +261,28 @@ public class Player : MonoBehaviour
         }
         else
         {
-
             PlayerDamageVisual();
-
         }
     }
 
+    public void ShipRepair()
+    {
+        if (_lives < 3)
+        {
+            _lives++;
+            _uIManager.Updatelives(_lives);
+            if (_playerDamage[0].activeSelf)
+            {
+                _playerDamage[0].SetActive(false);
+            }
+            else
+            {
+                _playerDamage[1].SetActive(false);
+            }
+        }
+        
+    }
+    
     public void TripleShotActive()
     {
 
