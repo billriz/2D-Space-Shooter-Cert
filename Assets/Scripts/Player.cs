@@ -231,6 +231,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void LaserRecharge()
+    {
+        _ammoCount = 15;
+        _uIManager.UpdateAmmo(_ammoCount);
+        _canFire = true;
+
+    }
+
     public void Damage()
     {
         if (_isPlayerShieldActive)
