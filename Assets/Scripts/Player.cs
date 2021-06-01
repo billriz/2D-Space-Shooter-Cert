@@ -61,6 +61,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private SpriteRenderer _playerShield;
 
+    private CameraShake _cameraShake;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -99,6 +101,14 @@ public class Player : MonoBehaviour
         {
 
             Debug.LogError("Animator on the Player is Null");
+        }
+
+        _cameraShake = GameObject.Find("Main Camera").GetComponent<CameraShake>();
+
+        if (_cameraShake == null)
+        {
+            Debug.LogError("Camera Shake is Null");
+            
         }
 
     }
@@ -250,6 +260,7 @@ public class Player : MonoBehaviour
 
         _lives--;
         _uIManager.Updatelives(_lives);
+        StartCoroutine(_cameraShake.Shake(0.5f, 0.2f));
         
         if (_lives < 1)
         {
