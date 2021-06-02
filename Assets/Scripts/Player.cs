@@ -12,8 +12,15 @@ public class Player : MonoBehaviour
     private float _speedBoostMultiplier = 2.0f;
 
     private float _thrustMultiplier = 1.5f;
+    private float _thrusterFuel = 100.0f;
     [SerializeField]
-    private float _fireRate = .50f;
+    private float _fuelUseRate = -0.5f;
+    [SerializeField]
+    private float _fuelRechargeRate = 0.1f;
+
+    private bool _canCharge;
+    [SerializeField]
+    private float _fireRate = 0.50f;
     [SerializeField]
     private float _powerDownTimer = 5.0f;
 
@@ -109,10 +116,16 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             _isThrusterActive = true;
+            _canCharge = false;
         }
         else
         {
             _isThrusterActive = false;
+            
+            if (_thrusterFuel < 100.0f)
+            {
+                StartCoroutine(RechargeFuel());
+            }
         }
         
         CalculateSpeed();
@@ -184,18 +197,37 @@ public class Player : MonoBehaviour
     private void CalculateSpeed()
     {
         _currentSpeed = _speed;
-        
-        if (_isThrusterActive && _isSpeedBoostActive == false)
+
+        if (_isThrusterActive && _thrusterFuel > 0.0f && _isSpeedBoostActive == false)
         {
             _currentSpeed = _speed * _thrustMultiplier;
-            
+            _thrusterFuel = Mathf.MoveTowards(_thrusterFuel, 0.0f, _fuelUseRate * Time.deltaTime);
+            _uIManager.UpdateThrusterHud(_thrusterFuel);
         }
         else if (_isSpeedBoostActive)
         {
             _currentSpeed = _speed * _speedBoostMultiplier;
-            
         }
+    }
 
+    private IEnumerator RechargeFuel()
+    {
+        _canCharge = true;
+       // yield return new WaitForSeconds(10.0f);
+        while (_canCharge == true)
+        {
+            _thrusterFuel = Mathf.MoveTowards(_thrusterFuel, 100.0f, _fuelRechargeRate * Time.deltaTime);
+            _uIManager.UpdateThrusterHud(_thrusterFuel);
+            
+           if (_thrusterFuel >= 100.0f)
+           {
+               _canCharge = false;
+           }
+
+           yield return null;
+        }
+        
+        
     }
 
     void FireLaser()

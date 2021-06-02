@@ -20,6 +20,8 @@ public class UIManager : MonoBehaviour
     private Text _RestartLevel;
     [SerializeField]
     private Text _ammoCount;
+    [SerializeField]
+    private Slider _thrusterHud;
 
     private GameManager _gameManager;
             
@@ -32,6 +34,7 @@ public class UIManager : MonoBehaviour
         _gameOver.gameObject.SetActive(false);
         _RestartLevel.gameObject.SetActive(false);
         _ammoCount.text = "Ammo: " + 15;
+        _thrusterHud.value = 100.0f;
 
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
         if (_gameManager == null)
@@ -72,6 +75,12 @@ public class UIManager : MonoBehaviour
     public void UpdateAmmo(int ammoCount)
     {
         _ammoCount.text = "Ammo: " + ammoCount;
+
+    }
+
+    public void UpdateThrusterHud(float thrusterFuel)
+    {
+        _thrusterHud.value = thrusterFuel;
 
     }
 
