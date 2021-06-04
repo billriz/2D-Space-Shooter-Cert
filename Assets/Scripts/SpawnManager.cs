@@ -58,7 +58,15 @@ public class SpawnManager : MonoBehaviour
         {
 
             Vector3 PosToSpawn = new Vector3(Random.Range(-10.5f, 10.5f), 7, 0);
-            int randomPowerUp = Random.Range(0, 5);
+            int randomPowerUp = Random.Range(0, 6);
+            if (randomPowerUp == 5 && Random.value > 0.7f)
+            {
+                GameObject newRarePowerUp = Instantiate(_powerUpPrefab[randomPowerUp], PosToSpawn, Quaternion.identity);
+            }
+            else
+            {
+                randomPowerUp = Random.Range(0, 5);
+            }
             GameObject newpowerUp = Instantiate(_powerUpPrefab[randomPowerUp], PosToSpawn, Quaternion.identity);            
             yield return new WaitForSeconds(Random.Range(3, 8));
 

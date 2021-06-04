@@ -62,6 +62,9 @@ public class PowerUps : MonoBehaviour
                     case 4:
                         player.ShipRepair();
                         break;
+                    case 5:
+                        player.PhotonBlastActive();
+                        break;
                     default:
                         Debug.LogError("No Case Found");
                         break;
