@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private float _thrustMultiplier = 1.5f;
     private float _thrusterFuel = 100.0f;
     [SerializeField]
+<<<<<<< HEAD
     private float _fuelUseRate = -0.5f;
     [SerializeField]
     private float _fuelRechargeRate = 0.1f;
@@ -21,6 +22,11 @@ public class Player : MonoBehaviour
     private bool _canCharge;
     [SerializeField]
     private float _fireRate = 0.50f;
+=======
+    private float _fireRate = .50f;
+
+    private float _angle = 100.0f;
+>>>>>>> sec_fire_powerup
     [SerializeField]
     private float _powerDownTimer = 5.0f;
 
@@ -48,6 +54,8 @@ public class Player : MonoBehaviour
     private SpawnManager _spawnManager;
     [SerializeField]
     private bool _isTripleShotActive = false;
+
+    private bool _isPhotonBlastActive = false;
     [SerializeField]
     private bool _isSpeedBoostActive = false;
 
@@ -252,6 +260,16 @@ public class Player : MonoBehaviour
            Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
                
         }
+        else if (_isPhotonBlastActive)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                _angle = _angle - 20;
+                GameObject photonBlast =  Instantiate(_laserPrefab, transform.position, Quaternion.Euler(0, 0, _angle));
+            }
+
+            _angle = 100;
+        }
         else
         {
           Instantiate(_laserPrefab, transform.position + new Vector3(0, +.8f, 0), Quaternion.identity);
@@ -337,6 +355,19 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(_powerDownTimer);
         _isTripleShotActive = false;
+    }
+
+    public void PhotonBlastActive()
+    {
+        _isPhotonBlastActive = true;
+        StartCoroutine(PhotonBlastPowerDownRoutine());
+
+    }
+
+    IEnumerator PhotonBlastPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(_powerDownTimer);
+        _isPhotonBlastActive = false;
 
     }
 
