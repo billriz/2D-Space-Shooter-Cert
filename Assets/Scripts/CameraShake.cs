@@ -21,5 +21,6 @@ public class CameraShake : MonoBehaviour
                yield return null;
            }
            transform.position = orignalPosition;
+           
        }
 }

@@ -14,7 +14,6 @@ public class Player : MonoBehaviour
     private float _thrustMultiplier = 1.5f;
     private float _thrusterFuel = 100.0f;
     [SerializeField]
-<<<<<<< HEAD
     private float _fuelUseRate = -0.5f;
     [SerializeField]
     private float _fuelRechargeRate = 0.1f;
@@ -22,11 +21,8 @@ public class Player : MonoBehaviour
     private bool _canCharge;
     [SerializeField]
     private float _fireRate = 0.50f;
-=======
-    private float _fireRate = .50f;
 
     private float _angle = 100.0f;
->>>>>>> sec_fire_powerup
     [SerializeField]
     private float _powerDownTimer = 5.0f;
 
@@ -310,7 +306,7 @@ public class Player : MonoBehaviour
 
         _lives--;
         _uIManager.Updatelives(_lives);
-        StartCoroutine(_cameraShake.Shake(0.5f, 0.2f));
+        StartCoroutine(_cameraShake.Shake(0.5f, 0.15f));
         
         if (_lives < 1)
         {
