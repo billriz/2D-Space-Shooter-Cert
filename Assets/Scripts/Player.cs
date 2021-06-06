@@ -237,11 +237,9 @@ public class Player : MonoBehaviour
            {
                _canCharge = false;
            }
-
+           
            yield return null;
         }
-        
-        
     }
 
     void FireLaser()
@@ -262,6 +260,7 @@ public class Player : MonoBehaviour
             {
                 _angle = _angle - 20;
                 GameObject photonBlast =  Instantiate(_laserPrefab, transform.position, Quaternion.Euler(0, 0, _angle));
+                
             }
 
             _angle = 100;

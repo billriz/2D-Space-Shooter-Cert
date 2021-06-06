@@ -905,7 +905,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 867805752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.11, y: 0, z: 0}
+  m_LocalPosition: {x: 0.08, y: -0.6, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 1825206616}
@@ -1560,7 +1560,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 100
   m_WholeNumbers: 1
-  m_Value: 0
+  m_Value: 100
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1681,7 +1681,7 @@ MonoBehaviour:
   - {fileID: 7029478509262185041, guid: 76925a23793c19e469e950de33c27442, type: 3}
   - {fileID: 6109028544404906165, guid: 3d03f58de5c19af42a26addc215866a0, type: 3}
   - {fileID: 4405429598478320297, guid: 5d9ddffda90c84a4fbf463b5095f1278, type: 3}
-  - {fileID: 4405429598478320297, guid: 5d9ddffda90c84a4fbf463b5095f1278, type: 3}
+  - {fileID: 4977239475601665381, guid: 9cc191085a746ba4fb6a855cb9a08b1d, type: 3}
   - {fileID: 3628561507643585565, guid: d33244179672e32459a948773b29b670, type: 3}
   _enemyContainer: {fileID: 510307471}
   _enemySpawnRate: 5

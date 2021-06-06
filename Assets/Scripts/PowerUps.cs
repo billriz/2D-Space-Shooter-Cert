@@ -8,7 +8,7 @@ public class PowerUps : MonoBehaviour
     [SerializeField]
     private float _speed = 3.0f;
     [SerializeField]
-    private int _powerUpId; // 0 = triple shot; 1 = Speed Boost; 2 = Shields 3 = Laser Recharge  4 = Ship Repair
+    private int _powerUpId; // 0 = triple shot; 1 = Speed Boost; 2 = Shields 3 = Laser Recharge  4 = Ship Repair 5 = Photon Blast
     [SerializeField]
     private AudioClip _PowerSoundClip;
 
