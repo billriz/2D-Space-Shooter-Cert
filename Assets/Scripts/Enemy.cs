@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.iOS.Xcode;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -25,6 +26,10 @@ public class Enemy : MonoBehaviour
     private AudioClip _laserSoundClip;
 
     private bool _isEnemyDestroyed;
+    [SerializeField]
+    private int _enemyId; // 0=Normal Enemy, 1=Diaganle enemy
+    [SerializeField]
+    Vector3 _diagDirection = Vector3.right;
 
     // Start is called before the first frame update
     void Start()
@@ -54,7 +59,10 @@ public class Enemy : MonoBehaviour
 
             Debug.LogError("Audio Source on the Enemy is Null");
         }
-                
+
+        float randomChange = Random.Range(3.0f, 5.0f);
+         
+        InvokeRepeating("ChangeDirection" , 5,5);
 
     }
 
@@ -74,18 +82,41 @@ public class Enemy : MonoBehaviour
 
     void CalculateMovement()
     {
-       
-        transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
-        if (transform.position.y < -8.0f)
+        switch(_enemyId)
         {
-            float randomX = Random.Range(-11.0f, 11.0f);
+            case 0:
+                transform.Translate(Vector3.down * _speed * Time.deltaTime);
+                break;
+            case 1:
+                transform.Translate(Vector3.down * _speed * Time.deltaTime + _diagDirection * _speed * Time.deltaTime);
+                break;
+            default:
+                break;
+        }
+
+        if (transform.position.y < -8.0f || transform.position.x > 11.0f || transform.position.x < -11.0f)
+        {
+            float randomX = Random.Range(-10.45f, 10.45f);
             transform.position = new Vector3(randomX, 9.0f, 0);
 
         }
 
     }
 
+    void ChangeDirection()
+    {
+        if (_diagDirection == Vector3.right)
+        {
+            _diagDirection = Vector3.left;
+        }
+        else if (_diagDirection == Vector3.left)
+        {
+            _diagDirection = Vector3.right;
+        }
+    }
+
+   
     void FireLaser()
     {
         _canFire = false;

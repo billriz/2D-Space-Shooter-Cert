@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -825,7 +825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d35bb34c9e756934580cc684937c069f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3.5
+  _speed: 7
   _currentSpeed: 0
   _speedBoostMultiplier: 2
   _fuelUseRate: 10
@@ -1675,7 +1675,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d59ee1ecdccd8764e9f2967fb3de16c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyPrefab: {fileID: 3283413912385725614, guid: d9b145172faaf9e4ca7f922831cf0571, type: 3}
+  _enemyPrefab:
+  - {fileID: 3283413912385725614, guid: d9b145172faaf9e4ca7f922831cf0571, type: 3}
+  - {fileID: 4153885093377159155, guid: 3a99b9cdcb41a7b41bd61327d27cd878, type: 3}
   _powerUpPrefab:
   - {fileID: 5234929565018092185, guid: d8ff80e9c6b750d44b616c972292cfcb, type: 3}
   - {fileID: 7029478509262185041, guid: 76925a23793c19e469e950de33c27442, type: 3}

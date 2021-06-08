@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 3.5f;
+    private float _speed = 7.0f;
     [SerializeField]
     private float _currentSpeed;
     [SerializeField]
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
     {
 
         transform.position = new Vector3(0, 0, 0);
-        _ammoCount = 15;
+        _ammoCount = 100;
         
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         if (_spawnManager == null)
@@ -197,13 +197,13 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(transform.position.x, -5.8f, 0);           
         }
 
-        if (transform.position.x >= 12.9f)
+        if (transform.position.x >= 11.8f)
         {
-            transform.position = new Vector3(-12.9f, transform.position.y, 0);
+            transform.position = new Vector3(-11.8f, transform.position.y, 0);
         }
-        else if (transform.position.x <= -12.9f)
+        else if (transform.position.x <= -11.8f)
         {
-            transform.position = new Vector3(12.9f, transform.position.y, 0);
+            transform.position = new Vector3(11.8f, transform.position.y, 0);
         }
 
     }
@@ -288,7 +288,7 @@ public class Player : MonoBehaviour
 
     public void LaserRecharge()
     {
-        _ammoCount = 15;
+        _ammoCount = 100;
         _uIManager.UpdateAmmo(_ammoCount);
         _canFire = true;
 
