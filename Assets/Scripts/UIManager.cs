@@ -22,8 +22,13 @@ public class UIManager : MonoBehaviour
     private Text _ammoCount;
     [SerializeField]
     private Slider _thrusterHud;
+    [SerializeField]
+    private Text _wave;
 
     private GameManager _gameManager;
+
+    public bool _isSpawning;
+    public bool _isWavesCompleted;
             
 
     // Start is called before the first frame update
@@ -33,6 +38,7 @@ public class UIManager : MonoBehaviour
         _scoreText.text = "Score: " + 0;
         _gameOver.gameObject.SetActive(false);
         _RestartLevel.gameObject.SetActive(false);
+        _wave.gameObject.SetActive(false);
         _ammoCount.text = "Ammo: " + 100;
         _thrusterHud.value = 100.0f;
 
@@ -94,6 +100,16 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void WavesOver()
+    { 
+        _isWavesCompleted = true;
+        DisplayAllWavesCompleted();
+        _gameManager.WavesCompleted();
+        
+        
+
+    }
+
 
     IEnumerator DisplayGameOverRoutine()
     {
@@ -107,7 +123,43 @@ public class UIManager : MonoBehaviour
 
         }
 
-    }   
+    }
+
+    public IEnumerator DisplayWaveRoutine(int nextwave)
+    {
+        while (_isSpawning == false)
+        {
+            _wave.gameObject.SetActive(true);
+            _wave.text = "Wave " + nextwave;
+            yield return new  WaitForSeconds(.5f);
+            _wave.text = " ";
+            yield return new WaitForSeconds(.5f); 
+        }
+        
+        _wave.gameObject.SetActive(false);
+        _isSpawning = false;
+
+    }
+
+    private void DisplayAllWavesCompleted()
+    {
+      
+          _wave.gameObject.SetActive(true);
+          _wave.text = "Waves Complete";
+          _RestartLevel.gameObject.SetActive(true);
+          //_gameManager.WavesCompleted();
+
+        
+      
+    }
+    
+
+    public void IsSpawning()
+    {
+        _isSpawning = true;
+    }
+    
+    
 
    
 }

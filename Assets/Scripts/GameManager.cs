@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     private bool _isGameOver;
 
+    private bool _isAllWavesCompleted;
+
 
     // Update is called once per frame
     void Update()
@@ -23,6 +25,12 @@ public class GameManager : MonoBehaviour
             Application.Quit();
 
         }
+        
+        if (Input.GetKeyDown(KeyCode.R) && _isAllWavesCompleted == true)
+        {
+            SceneManager.LoadScene(1);
+
+        }
 
     }
 
@@ -31,5 +39,10 @@ public class GameManager : MonoBehaviour
 
         _isGameOver = true;
 
+    }
+
+    public void WavesCompleted()
+    {
+        _isAllWavesCompleted = true;
     }
 }
