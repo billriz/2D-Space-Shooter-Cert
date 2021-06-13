@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SubsystemsImplementation;
 
 public class Enemy : MonoBehaviour
 {
@@ -29,6 +30,18 @@ public class Enemy : MonoBehaviour
     private int _enemyId; // 0=Normal Enemy, 1=Diaganle enemy
     [SerializeField]
     Vector3 _diagDirection = Vector3.right;
+    [SerializeField]
+    private float _rRadius = 0.1f , _aSpeed = 2f;
+    
+    [SerializeField]
+    private float posX, posY, angle;
+    
+    [SerializeField]
+    private GameObject _enemyShieldVisual;
+
+    private bool _isEnemeyShieldActive;
+    [SerializeField]
+    private bool _isEnemyMovingDown = true;
 
     // Start is called before the first frame update
     void Start()
@@ -58,13 +71,9 @@ public class Enemy : MonoBehaviour
 
             Debug.LogError("Audio Source on the Enemy is Null");
         }
-
-        float randomChange = Random.Range(3.0f, 5.0f);
-         
-        InvokeRepeating("ChangeDirection" , 5,5);
-
+        
+        
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -74,7 +83,7 @@ public class Enemy : MonoBehaviour
         if (_canFire == true && _isEnemyDestroyed == false)
         {
 
-            FireLaser();
+           // FireLaser();
         }
 
     }
@@ -82,13 +91,30 @@ public class Enemy : MonoBehaviour
     void CalculateMovement()
     {
 
-        switch(_enemyId)
+        switch (_enemyId)
         {
             case 0:
                 transform.Translate(Vector3.down * _speed * Time.deltaTime);
                 break;
             case 1:
                 transform.Translate(Vector3.down * _speed * Time.deltaTime + _diagDirection * _speed * Time.deltaTime);
+                break;
+            case 2:
+                if (_isEnemyMovingDown)
+                {
+                    transform.Translate(Vector3.down * 2.0f * Time.deltaTime + _diagDirection * 2.0f * Time.deltaTime);
+                   // if (transform.position.y <= 3.5f)
+                   // {
+                  //      _isEnemyMovingDown = false;
+                        
+                  //  }
+                  StartCoroutine(ElipticalMovemntCoolDownRoutine());
+                }
+                else
+                {
+                    ElipticalMovement();
+                  //  StartCoroutine(ElipticalMovemntCoolDownRoutine());
+                }
                 break;
             default:
                 break;
@@ -98,7 +124,6 @@ public class Enemy : MonoBehaviour
         {
             float randomX = Random.Range(-10.45f, 10.45f);
             transform.position = new Vector3(randomX, 9.0f, 0);
-
         }
 
     }
@@ -109,10 +134,35 @@ public class Enemy : MonoBehaviour
         {
             _diagDirection = Vector3.left;
         }
-        else if (_diagDirection == Vector3.left)
+        else
         {
             _diagDirection = Vector3.right;
         }
+    }
+
+    void ElipticalMovement()
+    {
+        posX = transform.position.x + Mathf.Cos (angle) * _rRadius;
+        posY = transform.position.y + Mathf.Sin (angle) * _rRadius / 2;
+        Vector3 eliptical = new Vector3(posX, posY,0);
+        transform.position = eliptical;
+        angle += Time.deltaTime * _aSpeed; 
+        
+    }
+
+    IEnumerator ElipticalMovemntCoolDownRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(5.0f);
+            _isEnemyMovingDown = false;
+            yield return new WaitForSeconds(5.0f);
+            _isEnemyMovingDown = true;
+
+        }
+        
+
+
     }
 
    
@@ -154,6 +204,13 @@ public class Enemy : MonoBehaviour
                 player.Damage();
             }
 
+            if (_isEnemeyShieldActive)
+            {
+                _isEnemeyShieldActive = false;
+                _enemyShieldVisual.SetActive(false);
+                return;
+            }
+
             EnemyDeath();
 
         }
@@ -161,7 +218,14 @@ public class Enemy : MonoBehaviour
         {
             
             Destroy(other.gameObject);
-           
+            
+            if (_isEnemeyShieldActive)
+            {
+                _isEnemeyShieldActive = false;
+                _enemyShieldVisual.SetActive(false);
+                return;
+            }
+            
             if (_player != null)
             {
                 _player.UpdateScore(10);
@@ -181,6 +245,40 @@ public class Enemy : MonoBehaviour
         _audioSource.clip = _ExpolsionSoundClip;
         _audioSource.Play();
         Destroy(this.gameObject, 2.2f);
+
+    }
+
+    public void ActivateShield()
+    {
+      
+        _enemyShieldVisual.SetActive(true);
+        _isEnemeyShieldActive = true;
+
+    }
+
+    public void SetEnemyId(int wave)
+    {
+        switch (wave)
+        {
+            case 0:
+                _enemyId = 0;
+                break;
+            case 1:
+                _enemyId = Random.Range(0, 2);
+                break;
+            case 2:
+                _enemyId = Random.Range(0, 3);
+                break;
+            default:
+                break;
+        }
+
+        if (_enemyId == 1 || _enemyId == 2)
+        {
+            float randomChange = Random.Range(3.0f, 5.0f);
+         
+            InvokeRepeating("ChangeDirection" , 5, randomChange);
+        }
 
     }
 
