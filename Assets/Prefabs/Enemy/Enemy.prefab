@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1628621369
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 333b0196b7a764df5a7768ead9b69dbc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -233,7 +233,7 @@ MonoBehaviour:
   _fireRate: 3
   _laserPrefab: {fileID: 8789916713383404705, guid: 13e31a16fb77e784da82b5c475d3544b, type: 3}
   _laserSoundClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
-  _enemyId: 2
+  _enemyId: 0
   _diagDirection: {x: 1, y: 0, z: 0}
   _rRadius: 0.1
   _aSpeed: 2

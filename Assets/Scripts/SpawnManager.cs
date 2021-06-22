@@ -77,7 +77,7 @@ public class SpawnManager : MonoBehaviour
     {
         _canSpawnEnemy = true;
         _uiManager.StartCoroutine(_uiManager.DisplayWaveRoutine(_nextWave + 1));
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.0f);
         _uiManager.IsSpawning();
         StartCoroutine(PowerUpSpawnRoutine());
         
@@ -106,7 +106,7 @@ public class SpawnManager : MonoBehaviour
     {
         while (_isCountingenemies)
         {
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.5f);
             if (GameObject.FindWithTag("Enemy") == null)
             {
                 _isCountingenemies = false;
@@ -153,12 +153,8 @@ public class SpawnManager : MonoBehaviour
         Vector3 PosToSpwan = new Vector3(Random.Range(-10.45f, 10.45f), 7, 0);
         GameObject newEnemy = Instantiate(_enemy, PosToSpwan, Quaternion.identity);
         newEnemy.transform.parent = _enemyContainer.transform;
-        newEnemy.GetComponent<Enemy>().SetEnemyId(_nextWave);
-        if (Random.value < .20f)
-        {
-           newEnemy.GetComponent<Enemy>().ActivateShield();
-        }
-
+       // newEnemy.GetComponent<Enemy>().SetEnemyId(_nextWave);
+        
     }
 
     IEnumerator PowerUpSpawnRoutine()

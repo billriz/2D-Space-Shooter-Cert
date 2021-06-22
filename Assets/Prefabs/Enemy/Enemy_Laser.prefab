@@ -43,6 +43,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Left_Laser
       objectReference: {fileID: 0}
+    - target: {fileID: 6148759935738637715, guid: 714f40c889bf8ac4d9575ae6ac399c30, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8037279013739003838, guid: 714f40c889bf8ac4d9575ae6ac399c30, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -101,9 +105,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8789916713383404710}
     m_Modifications:
+    - target: {fileID: 4542396631777257162, guid: 714f40c889bf8ac4d9575ae6ac399c30, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6148759935738637715, guid: 714f40c889bf8ac4d9575ae6ac399c30, type: 3}
       propertyPath: m_Name
       value: Right_Laser
+      objectReference: {fileID: 0}
+    - target: {fileID: 6148759935738637715, guid: 714f40c889bf8ac4d9575ae6ac399c30, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8037279013739003838, guid: 714f40c889bf8ac4d9575ae6ac399c30, type: 3}
       propertyPath: m_RootOrder
@@ -149,7 +161,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1040032404763553712, guid: 714f40c889bf8ac4d9575ae6ac399c30, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 714f40c889bf8ac4d9575ae6ac399c30, type: 3}
 --- !u!4 &1618525112081082254 stripped
 Transform:

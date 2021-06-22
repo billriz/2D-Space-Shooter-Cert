@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private float _speed = 7.0f;
+    private float _speed = 9.0f;
     [SerializeField]
     private float _currentSpeed;
     [SerializeField]
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     private bool _canCharge;
     [SerializeField]
-    private float _fireRate = 0.50f;
+    private float _fireRate = 0.05f;
 
     private float _angle = 100.0f;
     [SerializeField]

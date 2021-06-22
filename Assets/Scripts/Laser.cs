@@ -6,6 +6,7 @@ public class Laser : MonoBehaviour
 {
 
     private float _speed = 8.5f;
+    private float _playerLaserSpeed = 10.0f;
     [SerializeField]
     private bool _isEnemyLaser;
     
@@ -33,7 +34,7 @@ public class Laser : MonoBehaviour
 
         void MoveUp()
         {
-            transform.Translate(Vector3.up * _speed * Time.deltaTime);
+            transform.Translate(Vector3.up * _playerLaserSpeed * Time.deltaTime);
 
             if (transform.position.y > 8.0f || transform.position.x > 12.0f || transform.position.x < -12.0f)
             {

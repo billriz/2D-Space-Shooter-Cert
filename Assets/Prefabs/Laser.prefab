@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7357800015351892947}
   - component: {fileID: 1040032404763553712}
   - component: {fileID: 4542396631777257162}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: laser
   m_TagString: Laser
   m_Icon: {fileID: 0}
@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 650ae79e4f0e3ba429d99c7d8b6bc092, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isEnemyLaser: 0
 --- !u!50 &1040032404763553712
 Rigidbody2D:
   serializedVersion: 4

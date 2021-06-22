@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
     private bool _isEnemyMovingDown = true;
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
 
         _player = GameObject.FindWithTag("Player").GetComponent<Player>();
@@ -71,11 +71,24 @@ public class Enemy : MonoBehaviour
 
             Debug.LogError("Audio Source on the Enemy is Null");
         }
-        
-        
+
+        if (Random.value < .20f)
+        {
+            ActivateShield();
+        }
+
+        if (_enemyId == 1 || _enemyId == 2)
+        {
+            float randomChange = Random.Range(3.0f, 5.0f);
+
+            InvokeRepeating("ChangeDirection", 5, randomChange);
+        }
+
+
+
     }
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
 
         CalculateMovement();
@@ -83,7 +96,7 @@ public class Enemy : MonoBehaviour
         if (_canFire == true && _isEnemyDestroyed == false)
         {
 
-           // FireLaser();
+           FireLaser();
         }
 
     }
@@ -102,13 +115,8 @@ public class Enemy : MonoBehaviour
             case 2:
                 if (_isEnemyMovingDown)
                 {
-                    transform.Translate(Vector3.down * 2.0f * Time.deltaTime + _diagDirection * 2.0f * Time.deltaTime);
-                   // if (transform.position.y <= 3.5f)
-                   // {
-                  //      _isEnemyMovingDown = false;
-                        
-                  //  }
-                  StartCoroutine(ElipticalMovemntCoolDownRoutine());
+                    transform.Translate(Vector3.down * 2.0f * Time.deltaTime + _diagDirection * 2.0f * Time.deltaTime); 
+                    StartCoroutine(ElipticalMovemntCoolDownRoutine());
                 }
                 else
                 {
@@ -240,7 +248,7 @@ public class Enemy : MonoBehaviour
     {
         _isEnemyDestroyed = true;
         _collider2d.enabled = !_animator.enabled;
-        _speed = 0.2f;
+        _speed = 0.1f;
         _animator.SetTrigger("OnEnemyDeath");
         _audioSource.clip = _ExpolsionSoundClip;
         _audioSource.Play();
@@ -255,31 +263,6 @@ public class Enemy : MonoBehaviour
         _isEnemeyShieldActive = true;
 
     }
-
-    public void SetEnemyId(int wave)
-    {
-        switch (wave)
-        {
-            case 0:
-                _enemyId = 0;
-                break;
-            case 1:
-                _enemyId = Random.Range(0, 2);
-                break;
-            case 2:
-                _enemyId = Random.Range(0, 3);
-                break;
-            default:
-                break;
-        }
-
-        if (_enemyId == 1 || _enemyId == 2)
-        {
-            float randomChange = Random.Range(3.0f, 5.0f);
-         
-            InvokeRepeating("ChangeDirection" , 5, randomChange);
-        }
-
-    }
+   
 
 }

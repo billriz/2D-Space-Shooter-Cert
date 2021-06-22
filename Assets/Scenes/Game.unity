@@ -909,7 +909,7 @@ MonoBehaviour:
   _speedBoostMultiplier: 2
   _fuelUseRate: 10
   _fuelRechargeRate: 0.001
-  _fireRate: 0.5
+  _fireRate: 0.25
   _powerDownTimer: 5
   _laserPrefab: {fileID: 6148759935738637715, guid: 714f40c889bf8ac4d9575ae6ac399c30, type: 3}
   _tripleShotPrefab: {fileID: 1057596532175789182, guid: 3bfae9ddca47a464c8cff4bd4ef0842b, type: 3}
@@ -984,7 +984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 867805752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.9, y: 4.24, z: 0}
+  m_LocalPosition: {x: 6.9, y: -2.76, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 1825206616}
@@ -1770,21 +1770,27 @@ MonoBehaviour:
   - {fileID: 3628561507643585565, guid: d33244179672e32459a948773b29b670, type: 3}
   _enemyContainer: {fileID: 510307471}
   _enemySpawnRate: 5
-  _timeBetweenWaves: 3
+  _timeBetweenWaves: 2
   enemyWaves:
   - name: Wave 1
     enemyToSpawn:
     - {fileID: 3283413912385725614, guid: d9b145172faaf9e4ca7f922831cf0571, type: 3}
+    - {fileID: 3989321216228539365, guid: c3ff1a64a21a8f34d98b1a5ff694402a, type: 3}
     enemyCount: 10
     spawnRate: 3
   - name: Wave 2
     enemyToSpawn:
     - {fileID: 3283413912385725614, guid: d9b145172faaf9e4ca7f922831cf0571, type: 3}
+    - {fileID: 5564102592517055366, guid: 3a99b9cdcb41a7b41bd61327d27cd878, type: 3}
+    - {fileID: 3989321216228539365, guid: c3ff1a64a21a8f34d98b1a5ff694402a, type: 3}
     enemyCount: 20
     spawnRate: 2
   - name: Wave 3
     enemyToSpawn:
     - {fileID: 3283413912385725614, guid: d9b145172faaf9e4ca7f922831cf0571, type: 3}
+    - {fileID: 5564102592517055366, guid: 3a99b9cdcb41a7b41bd61327d27cd878, type: 3}
+    - {fileID: 5442522378740092766, guid: e08c97ba056e03f49ba0861942315797, type: 3}
+    - {fileID: 3989321216228539365, guid: c3ff1a64a21a8f34d98b1a5ff694402a, type: 3}
     enemyCount: 30
     spawnRate: 1
 --- !u!4 &1358752768
@@ -2520,3 +2526,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d27a99750ca650d4dab9df050734e618, type: 3}
+--- !u!1001 &1931460452927092653
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3989321216228539365, guid: c3ff1a64a21a8f34d98b1a5ff694402a, type: 3}
+      propertyPath: m_Name
+      value: Enemy_Doging
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329370767927565901, guid: c3ff1a64a21a8f34d98b1a5ff694402a, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329370767927565901, guid: c3ff1a64a21a8f34d98b1a5ff694402a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329370767927565901, guid: c3ff1a64a21a8f34d98b1a5ff694402a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329370767927565901, guid: c3ff1a64a21a8f34d98b1a5ff694402a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329370767927565901, guid: c3ff1a64a21a8f34d98b1a5ff694402a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329370767927565901, guid: c3ff1a64a21a8f34d98b1a5ff694402a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329370767927565901, guid: c3ff1a64a21a8f34d98b1a5ff694402a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329370767927565901, guid: c3ff1a64a21a8f34d98b1a5ff694402a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329370767927565901, guid: c3ff1a64a21a8f34d98b1a5ff694402a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329370767927565901, guid: c3ff1a64a21a8f34d98b1a5ff694402a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329370767927565901, guid: c3ff1a64a21a8f34d98b1a5ff694402a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c3ff1a64a21a8f34d98b1a5ff694402a, type: 3}
