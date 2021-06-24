@@ -6,24 +6,24 @@ using UnityEngine.SubsystemsImplementation;
 public class Enemy : MonoBehaviour
 {
 
-    private float _speed = 3.0f;
+    protected float _speed = 3.0f;
     [SerializeField]
     private AudioClip _ExpolsionSoundClip;
 
     private AudioSource _audioSource;
 
 
-    private Player _player;
+    protected Player _player;
 
     private Animator _animator;
     private Collider2D _collider2d;
     [SerializeField]
     private float _fireRate = 3.0f;
-    private bool _canFire = true;
+    protected bool _canFire = true;
     [SerializeField]
-    private GameObject _laserPrefab;
+    protected GameObject _laserPrefab;
     [SerializeField]
-    private AudioClip _laserSoundClip;
+    protected AudioClip _laserSoundClip;
 
     private bool _isEnemyDestroyed;
     [SerializeField]
@@ -167,8 +167,7 @@ public class Enemy : MonoBehaviour
             yield return new WaitForSeconds(5.0f);
             _isEnemyMovingDown = true;
 
-        }
-        
+        }       
 
 
     }
@@ -193,7 +192,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-   private IEnumerator FireControlTimer()
+   protected IEnumerator FireControlTimer()
     {
 
         yield return new WaitForSeconds(_fireRate);

@@ -86,7 +86,7 @@ public class Laser : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player" && _isEnemyLaser == true)
+        if (other.tag == "Player" ) // && _isEnemyLaser == true)
         {
 
             Player player = other.GetComponent<Player>();
@@ -95,6 +95,17 @@ public class Laser : MonoBehaviour
                 if (player.isPlayerDead == false)
                 {
                     player.Damage();
+
+                    if (transform.parent != null)
+                    {
+                        Destroy(this.transform.parent.gameObject);
+                    }
+                    else
+                    {
+
+                        Destroy(this.gameObject);
+
+                    }
 
                 }                
 
