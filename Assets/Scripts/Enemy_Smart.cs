@@ -50,7 +50,15 @@ public class Enemy_Smart : Enemy
     {
         _canFireAtPlayer = false;
 
-        Instantiate(base._laserPrefab, transform.position + new Vector3(0f,1.85f,0f), Quaternion.identity);
+        GameObject smartLaser = Instantiate(base._laserPrefab, transform.position + new Vector3(0f,1.85f,0f), Quaternion.identity);
+        Laser[] lasers = smartLaser.GetComponentsInChildren<Laser>();
+
+        for (int i = 0; i < lasers.Length; i++)
+        {
+
+            lasers[i].IsSmartLaser();
+
+        }
 
         StartCoroutine(FireAtPlayerTimer());
     }

@@ -153,7 +153,7 @@ public class SpawnManager : MonoBehaviour
         Vector3 PosToSpwan = new Vector3(Random.Range(-10.45f, 10.45f), 7, 0);
         GameObject newEnemy = Instantiate(_enemy, PosToSpwan, Quaternion.identity);
         newEnemy.transform.parent = _enemyContainer.transform;
-       // newEnemy.GetComponent<Enemy>().SetEnemyId(_nextWave);
+        newEnemy.GetComponent<Enemy>().SetEnemyId(_nextWave);
         
     }
 

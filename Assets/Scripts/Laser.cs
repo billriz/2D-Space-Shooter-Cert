@@ -9,6 +9,8 @@ public class Laser : MonoBehaviour
     private float _playerLaserSpeed = 10.0f;
     [SerializeField]
     private bool _isEnemyLaser;
+    [SerializeField]
+    private bool _isSmartLaser;
     
     
     // Start is called before the first frame update
@@ -84,9 +86,15 @@ public class Laser : MonoBehaviour
 
     }
 
+    public void IsSmartLaser()
+    {
+
+        _isSmartLaser = true;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "Player" ) // && _isEnemyLaser == true)
+        if (other.tag == "Player"  && _isEnemyLaser == true || _isSmartLaser == true)
         {
 
             Player player = other.GetComponent<Player>();
@@ -112,5 +120,6 @@ public class Laser : MonoBehaviour
             }
 
         }
+        
     }
 }

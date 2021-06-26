@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 1242754091767911215}
   - component: {fileID: 8326646166968002287}
   - component: {fileID: 6925345031079565210}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Laser_Recharge
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,6 +101,7 @@ MonoBehaviour:
   _speed: 3
   _powerUpId: 3
   _PowerSoundClip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
+  _explosionPreFab: {fileID: 299760171408177140, guid: 6b361bfdd65cf5e418d8d3bb775a0197, type: 3}
 --- !u!95 &1242754091767911215
 Animator:
   serializedVersion: 3

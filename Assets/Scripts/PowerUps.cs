@@ -11,6 +11,10 @@ public class PowerUps : MonoBehaviour
     private int _powerUpId; // 0 = triple shot; 1 = Speed Boost; 2 = Shields 3 = Laser Recharge  4 = Ship Repair 5 = Photon Blast
     [SerializeField]
     private AudioClip _PowerSoundClip;
+    [SerializeField]
+    private GameObject _explosionPreFab;
+
+    private GameObject _player;
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +26,15 @@ public class PowerUps : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        transform.Translate(Vector3.down * _speed * Time.deltaTime);
+        if (Input.GetKey(KeyCode.C))
+        {
+            PlayerIsCollecting();
+        }
+        else
+        {
+            transform.Translate(Vector3.down * _speed * Time.deltaTime);
+        }
+        
 
         if (transform.position.y < -8.0f)
         {
@@ -77,6 +88,20 @@ public class PowerUps : MonoBehaviour
             Destroy(this.gameObject);
 
         }
+
+        if (other.tag == "Laser")
+        {
+            Instantiate(_explosionPreFab, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
+    }
+
+    void PlayerIsCollecting()
+    {
+        _player = GameObject.Find("Player");
+        Vector3 _direction = this.transform.position - _player.transform.position;
+        _direction = _direction.normalized;
+        this.transform.position -= _direction * Time.deltaTime * (_speed * 3);
 
     }
 

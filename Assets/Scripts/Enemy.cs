@@ -31,17 +31,21 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     Vector3 _diagDirection = Vector3.right;
     [SerializeField]
-    private float _rRadius = 0.1f , _aSpeed = 2f;
-    
-    [SerializeField]
-    private float posX, posY, angle;
+    private float _rRadius = 1.0f;
+
+    private float posX, posY;
     
     [SerializeField]
     private GameObject _enemyShieldVisual;
 
     private bool _isEnemeyShieldActive;
     [SerializeField]
-    private bool _isEnemyMovingDown = true;
+    private bool _isEnemyMovingDown;
+
+    [SerializeField]
+    float PowerUpCastRadius = .5f;
+    [SerializeField]
+    float PowerUpCastDistance = 5.0f;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -83,8 +87,12 @@ public class Enemy : MonoBehaviour
 
             InvokeRepeating("ChangeDirection", 5, randomChange);
         }
-
-
+        if (_enemyId == 2)
+        {
+            _isEnemyMovingDown = true;
+            StartCoroutine(ElipticalMovemntCoolDownRoutine());
+        }
+        
 
     }
     // Update is called once per frame
@@ -96,8 +104,10 @@ public class Enemy : MonoBehaviour
         if (_canFire == true && _isEnemyDestroyed == false)
         {
 
-           FireLaser();
+          // FireLaser();
         }
+
+        CheckForPowerUp();
 
     }
 
@@ -115,13 +125,14 @@ public class Enemy : MonoBehaviour
             case 2:
                 if (_isEnemyMovingDown)
                 {
-                    transform.Translate(Vector3.down * 2.0f * Time.deltaTime + _diagDirection * 2.0f * Time.deltaTime); 
-                    StartCoroutine(ElipticalMovemntCoolDownRoutine());
+                    transform.Translate(Vector3.down * _speed * Time.deltaTime + _diagDirection * _speed * Time.deltaTime); 
+                   
                 }
                 else
                 {
+                    transform.Translate(Vector3.down * 0.0f * Time.deltaTime);
                     ElipticalMovement();
-                  //  StartCoroutine(ElipticalMovemntCoolDownRoutine());
+                  
                 }
                 break;
             default:
@@ -131,6 +142,7 @@ public class Enemy : MonoBehaviour
         if (transform.position.y < -8.0f || transform.position.x > 11.0f || transform.position.x < -11.0f)
         {
             float randomX = Random.Range(-10.45f, 10.45f);
+            _isEnemyMovingDown = true;
             transform.position = new Vector3(randomX, 9.0f, 0);
         }
 
@@ -150,23 +162,30 @@ public class Enemy : MonoBehaviour
 
     void ElipticalMovement()
     {
-        posX = transform.position.x + Mathf.Cos (angle) * _rRadius;
-        posY = transform.position.y + Mathf.Sin (angle) * _rRadius / 2;
-        Vector3 eliptical = new Vector3(posX, posY,0);
-        transform.position = eliptical;
-        angle += Time.deltaTime * _aSpeed; 
         
+        if (_isEnemyDestroyed == true)
+        {
+            _isEnemyMovingDown = true;
+            return;
+        }
+
+        posX = transform.position.x + Mathf.Cos(Time.time) * _rRadius;
+        posY = transform.position.y + Mathf.Sin (Time.time) * _rRadius / 2;
+        Vector3 eliptical = new Vector3(posX, posY, 0);
+        transform.position = eliptical;
+               
     }
 
     IEnumerator ElipticalMovemntCoolDownRoutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(2.0f);
             _isEnemyMovingDown = false;
+                       
             yield return new WaitForSeconds(5.0f);
             _isEnemyMovingDown = true;
-
+           
         }       
 
 
@@ -247,11 +266,11 @@ public class Enemy : MonoBehaviour
     {
         _isEnemyDestroyed = true;
         _collider2d.enabled = !_animator.enabled;
-        _speed = 0.1f;
+        _speed = 0.01f;
         _animator.SetTrigger("OnEnemyDeath");
         _audioSource.clip = _ExpolsionSoundClip;
         _audioSource.Play();
-        Destroy(this.gameObject, 2.2f);
+        Destroy(this.gameObject, 1.5f);
 
     }
 
@@ -262,6 +281,53 @@ public class Enemy : MonoBehaviour
         _isEnemeyShieldActive = true;
 
     }
+
+    public void SetEnemyId(int wave)
+
+    {
+        switch(wave)
+        {
+
+            case 0:
+                _enemyId = 0;
+                break;
+            case 1:
+                int RandomEnemy1 = Random.Range(0, 2);
+                _enemyId = RandomEnemy1;
+                break;
+            case 2:
+                int RandomEnemy2 = Random.Range(0, 3);
+                _enemyId = RandomEnemy2;
+                break;
+
+        }
+
+        if (_enemyId == 1 || _enemyId == 2)
+        {
+            float randomChange = Random.Range(3.0f, 5.0f);
+
+            InvokeRepeating("ChangeDirection", 5, randomChange);
+        }
+
+        if (_enemyId == 2)
+        {
+            StartCoroutine(ElipticalMovemntCoolDownRoutine());
+        }
+
+    }
+
+    void CheckForPowerUp()
+    {
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, PowerUpCastRadius, Vector2.down, PowerUpCastDistance, LayerMask.GetMask("powerups"));
+        Debug.DrawRay(transform.position, Vector3.down * PowerUpCastDistance, Color.red);
+
+        if (hit.collider != null && _canFire == true)
+        {
+            Debug.LogError("powerup detected");
+            FireLaser();
+        }
+    }
+
    
 
 }

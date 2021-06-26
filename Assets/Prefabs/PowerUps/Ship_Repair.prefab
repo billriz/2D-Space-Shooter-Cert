@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 3202332393672525589}
   - component: {fileID: 3743980268969697639}
   - component: {fileID: 8186189829290584590}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ship_Repair
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -120,6 +120,7 @@ MonoBehaviour:
   _speed: 3
   _powerUpId: 4
   _PowerSoundClip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
+  _explosionPreFab: {fileID: 299760171408177140, guid: 6b361bfdd65cf5e418d8d3bb775a0197, type: 3}
 --- !u!50 &3743980268969697639
 Rigidbody2D:
   serializedVersion: 4
