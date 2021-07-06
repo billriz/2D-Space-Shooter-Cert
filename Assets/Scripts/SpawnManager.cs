@@ -16,7 +16,7 @@ public class SpawnManager : MonoBehaviour
     private float _enemySpawnRate = 5.0f;
    
     private bool _stopSpawning = false;
-    [SerializeField] private float _timeBetweenWaves = 1.5f;
+    [SerializeField] private float _timeBetweenWaves = 2.0f;
     private int _nextWave = 0;
 
     private bool _isCountingenemies = false;
@@ -25,15 +25,14 @@ public class SpawnManager : MonoBehaviour
 
     private UIManager _uiManager;
     
-    
+      
     [System.Serializable]
     public class EnemyWaves
     {
         public string name;
         public GameObject[] enemyToSpawn;
         public int enemyCount;
-        public float spawnRate;
-        
+        public float spawnRate;                              
 
     }
 
@@ -77,7 +76,7 @@ public class SpawnManager : MonoBehaviour
     {
         _canSpawnEnemy = true;
         _uiManager.StartCoroutine(_uiManager.DisplayWaveRoutine(_nextWave + 1));
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(2.0f);
         _uiManager.IsSpawning();
         StartCoroutine(PowerUpSpawnRoutine());
         

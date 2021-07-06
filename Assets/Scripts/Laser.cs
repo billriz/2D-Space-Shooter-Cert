@@ -13,6 +13,7 @@ public class Laser : MonoBehaviour
     private bool _isSmartLaser;
     
     
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -102,6 +103,7 @@ public class Laser : MonoBehaviour
             {
                 if (player.isPlayerDead == false)
                 {
+                    
                     player.Damage();
 
                     if (transform.parent != null)
@@ -114,12 +116,8 @@ public class Laser : MonoBehaviour
                         Destroy(this.gameObject);
 
                     }
-
-                }                
-
+                } 
             }
-
-        }
-        
+        }        
     }
 }

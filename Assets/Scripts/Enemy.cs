@@ -31,21 +31,31 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     Vector3 _diagDirection = Vector3.right;
     [SerializeField]
-    private float _rRadius = 1.0f;
+    private float _rRadius = .5f;
+    [SerializeField]
+    private float _mag = 2.0f;
 
-    private float posX, posY;
+    private float posX, posY, PosZ;
     
     [SerializeField]
     private GameObject _enemyShieldVisual;
 
     private bool _isEnemeyShieldActive;
     [SerializeField]
-    private bool _isEnemyMovingDown;
+    private bool _isEnemyMovingDown = false;
 
     [SerializeField]
     float PowerUpCastRadius = .5f;
     [SerializeField]
     float PowerUpCastDistance = 5.0f;
+    [SerializeField]
+    float start;
+    [SerializeField]
+    float end;
+    float t = 0.0f;
+    private bool _isMovingside = false;
+
+    
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -79,19 +89,7 @@ public class Enemy : MonoBehaviour
         if (Random.value < .20f)
         {
             ActivateShield();
-        }
-
-        if (_enemyId == 1 || _enemyId == 2)
-        {
-            float randomChange = Random.Range(3.0f, 5.0f);
-
-            InvokeRepeating("ChangeDirection", 5, randomChange);
-        }
-        if (_enemyId == 2)
-        {
-            _isEnemyMovingDown = true;
-            StartCoroutine(ElipticalMovemntCoolDownRoutine());
-        }
+        }            
         
 
     }
@@ -104,7 +102,7 @@ public class Enemy : MonoBehaviour
         if (_canFire == true && _isEnemyDestroyed == false)
         {
 
-          // FireLaser();
+         // FireLaser();
         }
 
         CheckForPowerUp();
@@ -122,18 +120,16 @@ public class Enemy : MonoBehaviour
             case 1:
                 transform.Translate(Vector3.down * _speed * Time.deltaTime + _diagDirection * _speed * Time.deltaTime);
                 break;
-            case 2:
+            case 2:                
                 if (_isEnemyMovingDown)
                 {
-                    transform.Translate(Vector3.down * _speed * Time.deltaTime + _diagDirection * _speed * Time.deltaTime); 
-                   
+                    transform.Translate(Vector3.down * _speed * Time.deltaTime + _diagDirection * _speed * Time.deltaTime);
                 }
                 else
                 {
-                    transform.Translate(Vector3.down * 0.0f * Time.deltaTime);
+                    
                     ElipticalMovement();
-                  
-                }
+                }                
                 break;
             default:
                 break;
@@ -142,7 +138,7 @@ public class Enemy : MonoBehaviour
         if (transform.position.y < -8.0f || transform.position.x > 11.0f || transform.position.x < -11.0f)
         {
             float randomX = Random.Range(-10.45f, 10.45f);
-            _isEnemyMovingDown = true;
+           _isEnemyMovingDown = true;
             transform.position = new Vector3(randomX, 9.0f, 0);
         }
 
@@ -150,6 +146,7 @@ public class Enemy : MonoBehaviour
 
     void ChangeDirection()
     {
+        Debug.LogError("change direction called");
         if (_diagDirection == Vector3.right)
         {
             _diagDirection = Vector3.left;
@@ -162,29 +159,59 @@ public class Enemy : MonoBehaviour
 
     void ElipticalMovement()
     {
-        
-        if (_isEnemyDestroyed == true)
-        {
-            _isEnemyMovingDown = true;
-            return;
-        }
 
-        posX = transform.position.x + Mathf.Cos(Time.time) * _rRadius;
-        posY = transform.position.y + Mathf.Sin (Time.time) * _rRadius / 2;
-        Vector3 eliptical = new Vector3(posX, posY, 0);
-        transform.position = eliptical;
-               
+        // transform.Translate(Vector3.down * _speed * Time.deltaTime + _diagDirection * _speed * Time.deltaTime);
+
+
+        // if (_isEnemyDestroyed == true)
+        // {
+        //    _isEnemyMovingDown = true;
+        //    return;
+        // }
+        //transform.Translate(Vector3.down * 0.0f * Time.deltaTime);
+        // posX = transform.position.x - Mathf.PingPong(Time.time * _speed, 10);
+        if (_isMovingside)
+        {
+            start = transform.position.x;
+            end = transform.position.x + 10;
+            t = 0.0f;
+            StartCoroutine(ElipticalMovemntCoolDownRoutine());
+            _isMovingside = false;
+        }
+        
+
+        posX = Mathf.Lerp(start, end, t);
+        //posX = Mathf.Lerp(transform.position.x, transform.position.x + 10, Time.time);
+        posY = transform.position.y; // + Mathf.PingPong(Time.time, 10);
+        //posX = transform.position.x + Mathf.Cos(_mag) * _rRadius;
+        //posY = transform.position.y + Mathf.Sin(_mag) * _rRadius / 2;
+        PosZ = transform.position.z;
+        //Vector3 eliptical = new Vector3(posX, posY, 0);
+        //eliptical = eliptical.normalized;
+        transform.position = new Vector3(posX, posY, PosZ);
+        t += 0.6f * Time.deltaTime;
+        if (t > 1.0f)
+        {
+            float temp = end;
+            end = start;
+            start = temp;
+            t = 0.0f;
+        }
+        
     }
 
     IEnumerator ElipticalMovemntCoolDownRoutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(4.0f);
             _isEnemyMovingDown = false;
+            _isMovingside = true;
                        
-            yield return new WaitForSeconds(5.0f);
+            yield return new WaitForSeconds(4.0f);
             _isEnemyMovingDown = true;
+            
+
            
         }       
 
@@ -304,13 +331,14 @@ public class Enemy : MonoBehaviour
 
         if (_enemyId == 1 || _enemyId == 2)
         {
+            //float randomChange = Random.Range(3.0f, 5.0f);
             float randomChange = Random.Range(3.0f, 5.0f);
-
             InvokeRepeating("ChangeDirection", 5, randomChange);
         }
 
         if (_enemyId == 2)
         {
+            _isEnemyMovingDown = true;
             StartCoroutine(ElipticalMovemntCoolDownRoutine());
         }
 

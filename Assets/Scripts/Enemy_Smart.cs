@@ -24,26 +24,18 @@ public class Enemy_Smart : Enemy
         base.Update();
 
         RaycastHit2D hit = Physics2D.CircleCast(transform.position, CastRadius, Vector2.up, CastDistance, LayerMask.GetMask("player"));
-        Debug.DrawRay(transform.position, Vector3.up * CastDistance, Color.red);
-
+        
         if (hit.collider != null)
         {
-            Debug.LogError("player detected");           
+                    
            if (_canFireAtPlayer == true)
            {
                 FireLaserUp();
                 StartCoroutine(FireAtPlayerTimer());
-           }
-            
+           }          
            
-
         }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            FireLaserUp();
-
-        }
+       
     }
 
     void FireLaserUp()
@@ -67,7 +59,6 @@ public class Enemy_Smart : Enemy
     {
         yield return new WaitForSeconds(5.0f);
         _canFireAtPlayer = true;
-
 
     }
 }

@@ -62,6 +62,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject[] _playerDamage;
     [SerializeField]
+    private GameObject[] _playerDamageExplosion;
+    [SerializeField]
     private AudioClip _expolsionSoundClip;
 
     private UIManager _uIManager;
@@ -330,10 +332,12 @@ public class Player : MonoBehaviour
             if (_playerDamage[0].activeSelf)
             {
                 _playerDamage[0].SetActive(false);
+                _playerDamageExplosion[0].SetActive(false);
             }
             else
             {
                 _playerDamage[1].SetActive(false);
+                _playerDamageExplosion[1].SetActive(false);
             }
         }
         
@@ -422,30 +426,52 @@ public class Player : MonoBehaviour
     
     private void PlayerDamageVisual()
     {
-        switch(_lives)
+        switch (_lives)
         {
             case 2:
 
                 int randomDamage = Random.Range(0, 2);
-                _playerDamage[randomDamage].SetActive(true);
+                
+                _playerDamageExplosion[randomDamage].SetActive(true);
+                _audioSource.clip = _expolsionSoundClip;
+                _audioSource.Play();
+                StartCoroutine(PlayerHurt(randomDamage));
+
+                //_playerDamage[randomDamage].SetActive(true);
+                
                 break;
 
             case 1:
 
                 if(_playerDamage[0].activeSelf)
                 {
-                    _playerDamage[1].SetActive(true);
+                    _playerDamageExplosion[1].SetActive(true);
+                    _audioSource.clip = _expolsionSoundClip;
+                    _audioSource.Play();
+                    StartCoroutine(PlayerHurt(1));
+                   // _playerDamage[1].SetActive(true);
                 }
                 else
                 {
-                    _playerDamage[0].SetActive(true);
+                    _playerDamageExplosion[0].SetActive(true);
+                    _audioSource.clip = _expolsionSoundClip;
+                    _audioSource.Play();
+                    StartCoroutine(PlayerHurt(0));
+                   // _playerDamage[0].SetActive(true);
                 }
                 break;
 
             default:
                 break;
 
-        }
+        }           
+
+    }
+
+    IEnumerator PlayerHurt(int side)
+    {
+        yield return new WaitForSeconds(.5f);
+        _playerDamage[side].SetActive(true);
 
     }
 }

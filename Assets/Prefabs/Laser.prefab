@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isEnemyLaser: 0
+  _isSmartLaser: 0
 --- !u!50 &1040032404763553712
 Rigidbody2D:
   serializedVersion: 4

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1121132908203203813
 Transform:
   m_ObjectHideFlags: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 333b0196b7a764df5a7768ead9b69dbc, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.18431373, g: 0.6156863, b: 0.9137255, a: 0.38431373}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -160,7 +160,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3154912113cbb4a498df6f571c74e18c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.38431373, g: 1, b: 0.85882354, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -351,11 +351,12 @@ MonoBehaviour:
   _enemyId: 0
   _diagDirection: {x: 1, y: 0, z: 0}
   _rRadius: 0.1
-  _aSpeed: 2
-  posX: 0
-  posY: 0
-  angle: 0
+  _mag: 2
   _enemyShieldVisual: {fileID: 1963628756134026720}
   _isEnemyMovingDown: 1
-  CastRadius: 0.5
-  CastDistance: 2
+  PowerUpCastRadius: 0.5
+  PowerUpCastDistance: 5
+  start: 0
+  end: 0
+  LaserCastRadius: 0.5
+  LaserCastDistance: 8

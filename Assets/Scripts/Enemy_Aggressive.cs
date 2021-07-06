@@ -32,7 +32,7 @@ public class Enemy_Aggressive : Enemy
         
         if (_distanceToPlayer <= _playerDistance)
         {
-            Debug.LogError("player Found");
+
             Vector3 dir = this.transform.position - _player.transform.position;
             dir = dir.normalized;
             this.transform.position -= dir * Time.deltaTime * (_speed * _chaseMultiplyer);

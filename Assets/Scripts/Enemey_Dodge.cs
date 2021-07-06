@@ -5,9 +5,9 @@ using UnityEngine;
 public class Enemey_Dodge : Enemy
 {
     [SerializeField]
-    float CastRadius = .5f;
+    float LaserCastRadius = .5f;
     [SerializeField]
-    float CastDistance = 8.0f;
+    float LaserCastDistance = 8.0f;
 
     float DodgeRate = 1.0f;
    
@@ -23,13 +23,13 @@ public class Enemey_Dodge : Enemy
     {
         base.Update();
 
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position,CastRadius,Vector2.down,CastDistance, LayerMask.GetMask("laser"));
-        Debug.DrawRay(transform.position, Vector3.down * CastDistance, Color.red);
+        RaycastHit2D Laserhit = Physics2D.CircleCast(transform.position,LaserCastRadius,Vector2.down,LaserCastDistance, LayerMask.GetMask("laser"));
+        Debug.DrawRay(transform.position, Vector3.down * LaserCastDistance, Color.red);
 
-        if (hit.collider != null)
+        if (Laserhit.collider != null)
         {            
 
-            if(hit.collider.CompareTag("Laser"))
+            if(Laserhit.collider.CompareTag("Laser"))
             {               
                 transform.position = new Vector3(transform.position.x - DodgeRate, transform.position.y, transform.position.z);
                 DodgeRate -= .3f;
