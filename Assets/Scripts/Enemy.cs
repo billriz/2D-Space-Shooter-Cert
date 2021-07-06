@@ -27,14 +27,10 @@ public class Enemy : MonoBehaviour
 
     private bool _isEnemyDestroyed;
     [SerializeField]
-    private int _enemyId; // 0=Normal Enemy, 1=Diaganle enemy
+    private int _enemyId; // 0=Normal Enemy, 1=Diaganle enemy 2 = side to side
     [SerializeField]
     Vector3 _diagDirection = Vector3.right;
-    [SerializeField]
-    private float _rRadius = .5f;
-    [SerializeField]
-    private float _mag = 2.0f;
-
+    
     private float posX, posY, PosZ;
     
     [SerializeField]
@@ -159,17 +155,7 @@ public class Enemy : MonoBehaviour
 
     void ElipticalMovement()
     {
-
-        // transform.Translate(Vector3.down * _speed * Time.deltaTime + _diagDirection * _speed * Time.deltaTime);
-
-
-        // if (_isEnemyDestroyed == true)
-        // {
-        //    _isEnemyMovingDown = true;
-        //    return;
-        // }
-        //transform.Translate(Vector3.down * 0.0f * Time.deltaTime);
-        // posX = transform.position.x - Mathf.PingPong(Time.time * _speed, 10);
+                
         if (_isMovingside)
         {
             start = transform.position.x;
@@ -181,13 +167,9 @@ public class Enemy : MonoBehaviour
         
 
         posX = Mathf.Lerp(start, end, t);
-        //posX = Mathf.Lerp(transform.position.x, transform.position.x + 10, Time.time);
-        posY = transform.position.y; // + Mathf.PingPong(Time.time, 10);
-        //posX = transform.position.x + Mathf.Cos(_mag) * _rRadius;
-        //posY = transform.position.y + Mathf.Sin(_mag) * _rRadius / 2;
+        
+        posY = transform.position.y; 
         PosZ = transform.position.z;
-        //Vector3 eliptical = new Vector3(posX, posY, 0);
-        //eliptical = eliptical.normalized;
         transform.position = new Vector3(posX, posY, PosZ);
         t += 0.6f * Time.deltaTime;
         if (t > 1.0f)
@@ -209,12 +191,9 @@ public class Enemy : MonoBehaviour
             _isMovingside = true;
                        
             yield return new WaitForSeconds(4.0f);
-            _isEnemyMovingDown = true;
-            
-
-           
-        }       
-
+            _isEnemyMovingDown = true;          
+                       
+        }   
 
     }
 
@@ -331,7 +310,6 @@ public class Enemy : MonoBehaviour
 
         if (_enemyId == 1 || _enemyId == 2)
         {
-            //float randomChange = Random.Range(3.0f, 5.0f);
             float randomChange = Random.Range(3.0f, 5.0f);
             InvokeRepeating("ChangeDirection", 5, randomChange);
         }

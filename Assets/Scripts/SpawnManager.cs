@@ -24,10 +24,22 @@ public class SpawnManager : MonoBehaviour
     private bool _canSpawnEnemy = false;
 
     private UIManager _uiManager;
+
+       
     
-      
     [System.Serializable]
-    public class EnemyWaves
+   public struct PowerUps
+    {
+        public string name;
+        public GameObject PowerUpToSpawn;
+        public int weight;
+    }
+
+    public PowerUps[] powerUps;
+
+
+    [System.Serializable]
+    public struct EnemyWaves
     {
         public string name;
         public GameObject[] enemyToSpawn;
@@ -37,8 +49,9 @@ public class SpawnManager : MonoBehaviour
     }
 
     public EnemyWaves[] enemyWaves;
-    
-    
+
+    public int total;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +60,12 @@ public class SpawnManager : MonoBehaviour
         {
             Debug.LogError("UI Manager on SpawnManager is Null");
             
+        }
+
+        
+        foreach (PowerUps powerupdata in powerUps)
+        {
+            total += powerupdata.weight;
         }
     }
 
@@ -162,20 +181,27 @@ public class SpawnManager : MonoBehaviour
         while (_stopSpawning == false && _canSpawnEnemy == true)
         {
 
-            Vector3 PosToSpawn = new Vector3(Random.Range(-10.45f, 10.45f), 7, 0);
-            int randomPowerUp = Random.Range(0, 6);
-            if (randomPowerUp == 5 && Random.value > 0.7f)
-            {
-                GameObject newRarePowerUp = Instantiate(_powerUpPrefab[randomPowerUp], PosToSpawn, Quaternion.identity);
-            }
-            else
-            {
-                randomPowerUp = Random.Range(0, 5);
-            }
-            GameObject newpowerUp = Instantiate(_powerUpPrefab[randomPowerUp], PosToSpawn, Quaternion.identity);            
-            yield return new WaitForSeconds(Random.Range(3, 8));
+            Vector3 PosToSpawn = new Vector3(Random.Range(-10.45f, 10.45f), 7, 0);                              
 
+           
+            int RandonWeight = Random.Range(0, total);
+            foreach (PowerUps powerupdata in powerUps)
+            {
+                if (RandonWeight <= powerupdata.weight)
+                {
+                    GameObject newpowerUp = Instantiate(powerupdata.PowerUpToSpawn, PosToSpawn, Quaternion.identity);
+                    break;
+                }
+                else
+                {
+                    RandonWeight -= powerupdata.weight;
+                }
+
+            }
+            yield return new WaitForSeconds(Random.Range(3, 8));
         }
+
+        
 
 
     }
@@ -186,11 +212,10 @@ public class SpawnManager : MonoBehaviour
     }
 
     public void StartSpawning()
-    {
-       // StartCoroutine(SpawnRoutine());
+    {       
        _canSpawnEnemy = true;
        _stopSpawning = false;
        StartCoroutine(SpawnEnemyWave(enemyWaves[_nextWave]));
-       // StartCoroutine(PowerUpSpawnRoutine());
+      
     }
 }

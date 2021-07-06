@@ -1878,6 +1878,25 @@ MonoBehaviour:
   _enemyContainer: {fileID: 510307471}
   _enemySpawnRate: 5
   _timeBetweenWaves: 2
+  powerUps:
+  - name: Laser Recharge
+    PowerUpToSpawn: {fileID: 4405429598478320297, guid: 5d9ddffda90c84a4fbf463b5095f1278, type: 3}
+    weight: 45
+  - name: Speed Boost
+    PowerUpToSpawn: {fileID: 7029478509262185041, guid: 76925a23793c19e469e950de33c27442, type: 3}
+    weight: 20
+  - name: TripleShot
+    PowerUpToSpawn: {fileID: 5234929565018092185, guid: d8ff80e9c6b750d44b616c972292cfcb, type: 3}
+    weight: 15
+  - name: Player Shield
+    PowerUpToSpawn: {fileID: 6109028544404906165, guid: 3d03f58de5c19af42a26addc215866a0, type: 3}
+    weight: 10
+  - name: Ship Repair
+    PowerUpToSpawn: {fileID: 4977239475601665381, guid: 9cc191085a746ba4fb6a855cb9a08b1d, type: 3}
+    weight: 7
+  - name: Photon Blast
+    PowerUpToSpawn: {fileID: 3628561507643585565, guid: d33244179672e32459a948773b29b670, type: 3}
+    weight: 3
   enemyWaves:
   - name: Wave 1
     enemyToSpawn:
