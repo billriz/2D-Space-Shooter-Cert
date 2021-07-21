@@ -98,7 +98,7 @@ public class Enemy : MonoBehaviour
         if (_canFire == true && _isEnemyDestroyed == false)
         {
 
-         // FireLaser();
+          FireLaser();
         }
 
         CheckForPowerUp();
@@ -271,7 +271,8 @@ public class Enemy : MonoBehaviour
     private void EnemyDeath()
     {
         _isEnemyDestroyed = true;
-        _collider2d.enabled = !_animator.enabled;
+        // _collider2d.enabled = !_animator.enabled;
+        _collider2d.enabled = !_collider2d.enabled;
         _speed = 0.01f;
         _animator.SetTrigger("OnEnemyDeath");
         _audioSource.clip = _ExpolsionSoundClip;

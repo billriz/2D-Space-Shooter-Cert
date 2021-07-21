@@ -16,7 +16,8 @@ public class SpawnManager : MonoBehaviour
     private float _enemySpawnRate = 5.0f;
    
     private bool _stopSpawning = false;
-    [SerializeField] private float _timeBetweenWaves = 2.0f;
+    [SerializeField]
+    private float _timeBetweenWaves = 2.0f;
     private int _nextWave = 0;
 
     private bool _isCountingenemies = false;
@@ -35,7 +36,8 @@ public class SpawnManager : MonoBehaviour
         public int weight;
     }
 
-    public PowerUps[] powerUps;
+    [SerializeField]
+    private PowerUps[] powerUps;
 
 
     [System.Serializable]
@@ -47,8 +49,8 @@ public class SpawnManager : MonoBehaviour
         public float spawnRate;                              
 
     }
-
-    public EnemyWaves[] enemyWaves;
+    [SerializeField]
+    private EnemyWaves[] enemyWaves;
 
     public int total;
 
@@ -199,10 +201,7 @@ public class SpawnManager : MonoBehaviour
 
             }
             yield return new WaitForSeconds(Random.Range(3, 8));
-        }
-
-        
-
+        }       
 
     }
 
