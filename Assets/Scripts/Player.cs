@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
 
     private int _ammoCount;
 
+
     
     [SerializeField]
     private GameObject _laserPrefab;
@@ -81,8 +82,7 @@ public class Player : MonoBehaviour
     {
 
         transform.position = new Vector3(0, 0, 0);
-        _ammoCount = 100;
-        
+                
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         if (_spawnManager == null)
         {
@@ -123,7 +123,7 @@ public class Player : MonoBehaviour
             Debug.LogError("Camera Shake is Null");
             
         }
-
+        _ammoCount = 50;
     }
 
     // Update is called once per frame
@@ -290,7 +290,7 @@ public class Player : MonoBehaviour
 
     public void LaserRecharge()
     {
-        _ammoCount = 100;
+        _ammoCount = 50;
         _uIManager.UpdateAmmo(_ammoCount);
         _canFire = true;
 
