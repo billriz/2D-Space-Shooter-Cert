@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
 
     private bool _isThrusterActive = false;
     private bool _isPlayerShieldActive = false;
+    private bool _isNegitiveBoostActive = false;
     [SerializeField]
     private GameObject _PlayerShieldVisualizer;
     [SerializeField]
@@ -212,7 +213,15 @@ public class Player : MonoBehaviour
 
     private void CalculateSpeed()
     {
-        _currentSpeed = _speed;
+        if (_isNegitiveBoostActive)
+        {
+            _currentSpeed = _speed / 6;
+        }
+        else
+        {
+            _currentSpeed = _speed;
+        }
+        
 
         if (_isThrusterActive && _thrusterFuel > 0.0f && _isSpeedBoostActive == false)
         {
@@ -384,6 +393,20 @@ public class Player : MonoBehaviour
        _isSpeedBoostActive = false;
 
     }
+
+    public void NegitiveBoostActive()
+    {
+        _isNegitiveBoostActive = true;
+        StartCoroutine(NegitiveBoostPowerDown());
+    }
+
+    IEnumerator NegitiveBoostPowerDown()
+    {
+        yield return new WaitForSeconds(_powerDownTimer);
+        _isNegitiveBoostActive = false;
+
+    }
+
     
 
    public void PlayerShieldActive()

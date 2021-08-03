@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField]
     private Text _scoreText;
+    
     private int MaxAmmo = 50;
     [SerializeField]
     private Sprite[] _livesSprites;
@@ -40,8 +41,9 @@ public class UIManager : MonoBehaviour
         _gameOver.gameObject.SetActive(false);
         _RestartLevel.gameObject.SetActive(false);
         _wave.gameObject.SetActive(false);
-        _ammoCount.text = "Ammo: " + MaxAmmo + "/" + MaxAmmo;
-        _thrusterHud.value = 100.0f;
+        UpdateAmmo(MaxAmmo);
+        UpdateThrusterHud(100.0f);
+        
 
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
         if (_gameManager == null)

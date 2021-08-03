@@ -8,7 +8,7 @@ public class PowerUps : MonoBehaviour
     [SerializeField]
     private float _speed = 3.0f;
     [SerializeField]
-    private int _powerUpId; // 0 = triple shot; 1 = Speed Boost; 2 = Shields 3 = Laser Recharge  4 = Ship Repair 5 = Photon Blast
+    private int _powerUpId; // 0 = triple shot; 1 = Speed Boost; 2 = Shields 3 = Laser Recharge  4 = Ship Repair 5 = Photon Blast 6 = Negitive
     [SerializeField]
     private AudioClip _PowerSoundClip;
     [SerializeField]
@@ -32,7 +32,7 @@ public class PowerUps : MonoBehaviour
         }
         else
         {
-            transform.Translate(Vector3.down * _speed * Time.deltaTime);
+            transform.Translate(Vector2.down * _speed * Time.deltaTime);
         }
         
 
@@ -76,12 +76,13 @@ public class PowerUps : MonoBehaviour
                     case 5:
                         player.PhotonBlastActive();
                         break;
+                    case 6:
+                        player.NegitiveBoostActive();
+                        break;
                     default:
                         Debug.LogError("No Case Found");
                         break;
-
-                }
-               
+                }               
 
             }
 
