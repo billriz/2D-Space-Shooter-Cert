@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
     private GameObject _tripleShotPrefab;
     [SerializeField]
     private AudioClip _fireLaserSound;
+    [SerializeField] private GameObject _homingMisslePrefab;
 
     [SerializeField]
     private int _lives = 3;
@@ -156,6 +157,10 @@ public class Player : MonoBehaviour
             FireLaser();
         }
 
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            Instantiate(_homingMisslePrefab, transform.position, Quaternion.Euler(0,0,90));
+        }
     }
 
     void CalculateMovement()

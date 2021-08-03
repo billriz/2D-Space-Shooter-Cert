@@ -914,6 +914,7 @@ MonoBehaviour:
   _laserPrefab: {fileID: 6148759935738637715, guid: 714f40c889bf8ac4d9575ae6ac399c30, type: 3}
   _tripleShotPrefab: {fileID: 1057596532175789182, guid: 3bfae9ddca47a464c8cff4bd4ef0842b, type: 3}
   _fireLaserSound: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
+  _homingMisslePrefab: {fileID: 3768424949729909938, guid: 7ef89151cf0f4874eb474895d7d6fd9b, type: 3}
   _lives: 3
   _hits: 0
   isPlayerDead: 0
@@ -987,7 +988,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 867805752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.52, y: -2.56, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 1825206616}
@@ -2776,15 +2777,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3768424949729542290, guid: 7ef89151cf0f4874eb474895d7d6fd9b, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3768424949729542290, guid: 7ef89151cf0f4874eb474895d7d6fd9b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3768424949729542290, guid: 7ef89151cf0f4874eb474895d7d6fd9b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3768424949729542290, guid: 7ef89151cf0f4874eb474895d7d6fd9b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2824,60 +2825,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ef89151cf0f4874eb474895d7d6fd9b, type: 3}
---- !u!1001 &8626315644038433847
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8087459026445610746, guid: 17c6f4001d4539444a965ee6f0e957d4, type: 3}
-      propertyPath: m_RootOrder
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 8087459026445610746, guid: 17c6f4001d4539444a965ee6f0e957d4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -4.57
-      objectReference: {fileID: 0}
-    - target: {fileID: 8087459026445610746, guid: 17c6f4001d4539444a965ee6f0e957d4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8087459026445610746, guid: 17c6f4001d4539444a965ee6f0e957d4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8087459026445610746, guid: 17c6f4001d4539444a965ee6f0e957d4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8087459026445610746, guid: 17c6f4001d4539444a965ee6f0e957d4, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8087459026445610746, guid: 17c6f4001d4539444a965ee6f0e957d4, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8087459026445610746, guid: 17c6f4001d4539444a965ee6f0e957d4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8087459026445610746, guid: 17c6f4001d4539444a965ee6f0e957d4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8087459026445610746, guid: 17c6f4001d4539444a965ee6f0e957d4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8087459026445610746, guid: 17c6f4001d4539444a965ee6f0e957d4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8896788007489729600, guid: 17c6f4001d4539444a965ee6f0e957d4, type: 3}
-      propertyPath: m_Name
-      value: Negitive_PickUp
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 17c6f4001d4539444a965ee6f0e957d4, type: 3}
