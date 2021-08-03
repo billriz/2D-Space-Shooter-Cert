@@ -1897,6 +1897,9 @@ MonoBehaviour:
   - name: Photon Blast
     PowerUpToSpawn: {fileID: 3628561507643585565, guid: d33244179672e32459a948773b29b670, type: 3}
     weight: 3
+  - name: Negative_Boost
+    PowerUpToSpawn: {fileID: 8896788007489729600, guid: 17c6f4001d4539444a965ee6f0e957d4, type: 3}
+    weight: 2
   enemyWaves:
   - name: Wave 1
     enemyToSpawn:
