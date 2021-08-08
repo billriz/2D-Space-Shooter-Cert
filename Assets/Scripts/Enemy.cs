@@ -246,7 +246,7 @@ public class Enemy : MonoBehaviour
             EnemyDeath();
 
         }
-        else if (other.CompareTag("Laser"))
+        else if (other.CompareTag("Laser") || other.CompareTag("HomMissile"))
         {
             
             Destroy(other.gameObject);

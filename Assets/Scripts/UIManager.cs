@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     private Text _scoreText;
     
     private int MaxAmmo = 50;
+    private int MaxMissile = 3;
     [SerializeField]
     private Sprite[] _livesSprites;
     [SerializeField]
@@ -22,6 +23,8 @@ public class UIManager : MonoBehaviour
     private Text _RestartLevel;
     [SerializeField]
     private Text _ammoCount;
+    [SerializeField]
+    private Text _missileCount;
     [SerializeField]
     private Slider _thrusterHud;
     [SerializeField]
@@ -42,6 +45,7 @@ public class UIManager : MonoBehaviour
         _RestartLevel.gameObject.SetActive(false);
         _wave.gameObject.SetActive(false);
         UpdateAmmo(MaxAmmo);
+        UpdateMissile(0);
         UpdateThrusterHud(100.0f);
         
 
@@ -87,6 +91,11 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void UpdateMissile(int missileCount)
+    {
+        _missileCount.text = "Missile: " + missileCount + "/" + MaxMissile;
+    }
+
     public void UpdateThrusterHud(float thrusterFuel)
     {
         _thrusterHud.value = thrusterFuel;
@@ -109,8 +118,6 @@ public class UIManager : MonoBehaviour
         DisplayAllWavesCompleted();
         _gameManager.WavesCompleted();
         
-        
-
     }
 
 

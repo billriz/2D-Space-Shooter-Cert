@@ -105,7 +105,7 @@ public class SpawnManager : MonoBehaviour
         {
             int randomMax = _enemyWaves.enemyToSpawn.Length;
             int randomEnemy = Random.Range(0, randomMax);
-         //   SpawnEnemy(_enemyWaves.enemyToSpawn[randomEnemy]);
+            SpawnEnemy(_enemyWaves.enemyToSpawn[randomEnemy]);
             
             yield return new WaitForSeconds(_enemyWaves.spawnRate);
         }

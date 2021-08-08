@@ -5,7 +5,7 @@ using UnityEngine;
 public class HomingMissle : MonoBehaviour
 {
 
-    private float _speed = 3.0f;
+    private float _speed = 12.0f;
 
     private float _minDistance;
 
@@ -26,22 +26,27 @@ public class HomingMissle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
-       // transform.Translate(Vector3.up * _speed * Time.deltaTime);
+        if (_closestEnemy != null)
+        {
+            if (Vector3.Distance(transform.position ,_closestEnemy.transform.position) != 0)
+            {
+                
+                transform.position = Vector2.MoveTowards(transform.position, _closestEnemy.transform.position, _speed * Time.deltaTime);
 
-     //  transform.position =
-     //      Vector2.MoveTowards(transform.position, _closestEnemy.transform.position, _speed * Time.deltaTime);
+                Vector3 direction = _closestEnemy.transform.position - transform.position;
 
-       Vector3 direction = _closestEnemy.transform.position - transform.position;
-       Debug.DrawRay(transform.position,_closestEnemy.transform.position, Color.blue);
-       Debug.LogError("direction: " + direction);
-       float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Deg2Rad - 90f;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
-      Debug.LogError("angle: " + angle);
-       //Quaternion angleAxis = Quaternion.AngleAxis(angle, Vector3.forward);
-       //transform.rotation = Quaternion.Slerp(transform.rotation, angleAxis, Time.deltaTime * 50);
-       transform.eulerAngles = Vector3.forward * angle;
-    }
+                transform.eulerAngles = Vector3.forward * angle;
+            }
+
+        }
+        else
+        {
+            _closestEnemy = GetClosestEnemy();
+
+        }
+    }   
 
     private GameObject GetClosestEnemy()
     {

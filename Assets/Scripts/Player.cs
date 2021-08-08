@@ -30,6 +30,12 @@ public class Player : MonoBehaviour
 
     private int _ammoCount;
 
+    private int _homMissileCount;
+
+    private int _missileScoreCheck;
+
+    private int _missileScoreReward = 100;
+
 
     
     [SerializeField]
@@ -126,6 +132,8 @@ public class Player : MonoBehaviour
             
         }
         _ammoCount = 50;
+
+        _missileScoreCheck = _missileScoreReward;
     }
 
     // Update is called once per frame
@@ -157,9 +165,13 @@ public class Player : MonoBehaviour
             FireLaser();
         }
 
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.X) && _homMissileCount > 0 && _canFire)
         {
+            _canFire = false;
             Instantiate(_homingMisslePrefab, transform.position, Quaternion.Euler(0,0,90));
+            _homMissileCount -= 1;
+            _uIManager.UpdateMissile(_homMissileCount);
+            StartCoroutine(FireControlTimer());
         }
     }
 
@@ -449,6 +461,13 @@ public class Player : MonoBehaviour
     {
         _score += points;
         _uIManager.UpdateScore(_score);
+        if (_score >=_missileScoreCheck && _homMissileCount < 3)
+        {
+            
+            _homMissileCount += 1;
+            _uIManager.UpdateMissile(_homMissileCount);
+            _missileScoreCheck += _missileScoreReward;
+        }
 
     }
     
