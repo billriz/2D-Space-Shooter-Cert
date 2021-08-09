@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Laser : MonoBehaviour
 {
-
+    [SerializeField]
     private float _speed = 8.5f;
     private float _playerLaserSpeed = 10.0f;
     [SerializeField]
     private bool _isEnemyLaser;
     [SerializeField]
     private bool _isSmartLaser;
+
+    [SerializeField] private bool _isBossLaser;
     
     
     
@@ -59,6 +61,12 @@ public class Laser : MonoBehaviour
 
         void MoveDown()
         {
+            if (_isBossLaser)
+            {
+                _speed = 12.0f;
+
+            }
+
             transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
             if (transform.position.y <= -8.0f)
@@ -91,6 +99,13 @@ public class Laser : MonoBehaviour
     {
 
         _isSmartLaser = true;
+    }
+
+    public void IsBossLaser()
+    {
+        _isEnemyLaser = true;
+        _isBossLaser = true;
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)

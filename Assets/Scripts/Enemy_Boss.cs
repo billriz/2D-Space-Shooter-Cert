@@ -15,21 +15,32 @@ public class Enemy_Boss : MonoBehaviour
     public float PosX;
     [SerializeField]
     private int _hits = 50;
+    [SerializeField]
+    private int _shieldHits = 3;
 
     private bool _isInPosition;
     [SerializeField]
     private GameObject _bossLaserPrefab;
     [SerializeField]
     private GameObject _bossLaser2Prefab;
+    [SerializeField]
+    private GameObject _bossShieldVisual;
 
     private bool _canFire;
     private bool _canFire2;
+
+    private Animator _animator;
+    [SerializeField]
+    private AudioClip _explosionClip;
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(FireControlTimer());
         StartCoroutine(Fire2ControlTimer());
+
+        _animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -82,7 +93,7 @@ public class Enemy_Boss : MonoBehaviour
 
             for (int i = 0; i < lasers.Length; i++)
             {
-                lasers[i].IsEnemyLaser();
+                lasers[i].IsBossLaser();
             }
 
             StartCoroutine(FireControlTimer());
@@ -108,7 +119,7 @@ public class Enemy_Boss : MonoBehaviour
 
             for (int i = 0; i < lasers.Length; i++)
             {
-                lasers[i].IsEnemyLaser();
+                lasers[i].IsBossLaser();
             }
             StartCoroutine(Fire2ControlTimer());
         }
@@ -124,16 +135,26 @@ public class Enemy_Boss : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
        if (other.CompareTag("Laser"))
-        {
-            _hits--;
+       {
+           if (_shieldHits > 0)
+           {
+               _shieldHits -= 1;
+               if (_shieldHits <= 0)
+               {
+                   _bossShieldVisual.SetActive(false);
+               }
+               return;
+           }
+           
+           _hits--;
             Destroy(other.gameObject);
             if (_hits <= 0)
             {
-
-                Destroy(this.gameObject);
+                _animator.SetTrigger("OnBossDeath");
+                Destroy(this.gameObject,1.5f);
             }
             
 
-        }
+       }
     }
 }
