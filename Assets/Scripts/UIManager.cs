@@ -135,12 +135,12 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public IEnumerator DisplayWaveRoutine(int nextwave)
+    public IEnumerator DisplayWaveRoutine(string nextwave)
     {
         while (_isSpawning == false)
         {
             _wave.gameObject.SetActive(true);
-            _wave.text = "Wave " + nextwave;
+            _wave.text = nextwave;
             yield return new  WaitForSeconds(.5f);
             _wave.text = " ";
             yield return new WaitForSeconds(.5f); 
@@ -157,7 +157,7 @@ public class UIManager : MonoBehaviour
           _wave.gameObject.SetActive(true);
           _wave.text = "Waves Complete";
           _RestartLevel.gameObject.SetActive(true);
-          //_gameManager.WavesCompleted();
+          _gameManager.WavesCompleted();
 
         
       

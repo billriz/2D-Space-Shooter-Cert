@@ -43,7 +43,7 @@ public class SpawnManager : MonoBehaviour
     [System.Serializable]
     public struct EnemyWaves
     {
-        public string name;
+        public string Name;
         public GameObject[] enemyToSpawn;
         public int enemyCount;
         public float spawnRate;                              
@@ -96,7 +96,9 @@ public class SpawnManager : MonoBehaviour
     IEnumerator SpawnEnemyWave(EnemyWaves _enemyWaves)
     {
         _canSpawnEnemy = true;
-        _uiManager.StartCoroutine(_uiManager.DisplayWaveRoutine(_nextWave + 1));
+        //_uiManager.StartCoroutine(_uiManager.DisplayWaveRoutine(_nextWave + 1));
+        _uiManager.StartCoroutine(_uiManager.DisplayWaveRoutine(_enemyWaves.Name));
+        Debug.LogError(_enemyWaves.Name);
         yield return new WaitForSeconds(2.0f);
         _uiManager.IsSpawning();
         StartCoroutine(PowerUpSpawnRoutine());
