@@ -330,7 +330,7 @@ public class Enemy : MonoBehaviour
 
         if (hit.collider != null && _canFire == true)
         {
-            Debug.LogError("powerup detected");
+           
             FireLaser();
         }
     }

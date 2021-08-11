@@ -98,7 +98,6 @@ public class SpawnManager : MonoBehaviour
         _canSpawnEnemy = true;
         //_uiManager.StartCoroutine(_uiManager.DisplayWaveRoutine(_nextWave + 1));
         _uiManager.StartCoroutine(_uiManager.DisplayWaveRoutine(_enemyWaves.Name));
-        Debug.LogError(_enemyWaves.Name);
         yield return new WaitForSeconds(2.0f);
         _uiManager.IsSpawning();
         StartCoroutine(PowerUpSpawnRoutine());
@@ -153,7 +152,6 @@ public class SpawnManager : MonoBehaviour
             if (_nextWave > (enemyWaves.Length - 1))
             {
                 _nextWave = 0;
-                Debug.LogError("waves complete");
                 _stopSpawning = true;
                 _canSpawnEnemy = false;
                 _uiManager.WavesOver();
