@@ -10,6 +10,8 @@ public class Astroid : MonoBehaviour
     private SpawnManager _spawnmanager;
     [SerializeField]
     private GameObject _explosionPreFab;
+
+
        
 
     // Start is called before the first frame update
